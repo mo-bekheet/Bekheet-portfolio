@@ -1,0 +1,414 @@
+
+/* Container Styling */
+.link1 {
+  position: relative; /* Changed from absolute to relative */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px; /* Consistent spacing */
+  background: linear-gradient(145deg, rgba(25, 15, 50, 0.5), rgba(50, 30, 90, 0.7)); /* Adjusted colors */
+  padding: 15px;
+  border-radius: 20px; /* Adjusted border-radius */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5);
+
+  z-index: 20; /* Ensures container is on top */
+}
+
+/* Link Styling */
+.link1 a {
+  color: #e0e0e0; /* Adjusted text color */
+  padding: 12px 20px; /* Larger clickable area */
+  background-color: transparent; /* Ensures hover effect looks clean */
+  border-radius: 30px;
+  transition: color 0.3s ease, transform 0.2s ease, background-color 0.3s ease;
+  display: flex; /* Ensure icons are clickable */
+  align-items: center; /* Center icons vertically */
+  justify-content: center; /* Center icons horizontally */
+  font-size: 1.5rem;
+  margin: 0 10px;
+  display: inline-block;
+}
+
+.link1 a i {
+  font-size: 1.5rem; /* Increase icon size */
+  margin-right: 0.5rem; /* Space between icon and text */
+}
+
+.link1 a:hover {
+  color: #ff79c6;
+  background-color: rgba(255, 255, 255, 0.1);
+  transform: scale(1.1);
+}
+
+/* Responsive Styling */
+@media (max-width: 768px) {
+  .link1 {
+    flex-wrap: wrap; /* Allows wrapping */
+    padding: 10px;
+    text-align: center;
+    margin-top: 20px;
+    border-radius: 15px; /* Adjusted border-radius for smaller screens */
+  }
+
+  .link1 a {
+    font-size: 30px; /* Adjust size */
+    font-size: 1.2rem;
+    margin: 5px;
+    color: #d0d0d0; /* Adjusted text color for smaller screens */
+  }
+
+  .link1 a i {
+    font-size: 1.8rem; /* Increase icon size for smaller screens */
+  }
+}
+
+@media (max-width: 480px) {
+  .link1 {
+    flex-direction: row; /* Ensure items are in a single row */
+    align-items: center; /* Center each link */
+    gap: 15px;
+    border-radius: 10px; /* Adjusted border-radius for phone screens */
+  }
+
+  .link1 a {
+    font-size: 18px;
+    padding: 10px 15px; /* Maintain clickable size */
+    color: #c0c0c0; /* Adjusted text color for phone screens */
+  }
+
+  .link1 a i {
+    font-size: 2rem; /* Further increase icon size for phone screens */
+  }
+}
+
+/* Responsive Design for Home Section */
+@media (max-width: 768px) {
+  .home-header {
+    text-align: center;
+  }
+
+  .home-header .heading {
+    font-size: 2rem;
+  }
+
+  .home-header .heading-name {
+    font-size: 2.2rem;
+  }
+
+  .home-content {
+    padding: 5rem 0 1rem !important;
+  }
+
+  .home-about-description {
+    padding-top: 50px !important;
+    padding-bottom: 10px !important;
+  }
+
+  .home-about-body {
+    font-size: 1rem !important;
+  }
+
+  .home-about-social {
+    padding-top: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .home-header .heading {
+    font-size: 1.5rem;
+  }
+
+  .home-header .heading-name {
+    font-size: 1.8rem;
+  }
+
+  .home-content {
+    padding: 3rem 0 1rem !important;
+  }
+
+  .home-about-description {
+    padding-top: 30px !important;
+    padding-bottom: 10px !important;
+  }
+
+  .home-about-body {
+    font-size: 0.9rem !important;
+  }
+
+  .home-about-social {
+    padding-top: 10px;
+  }
+}
+
+/* Contact Option */
+.contact-option {
+  display: flex;
+  flex-direction: row;
+  padding: 0.6rem;
+  border-radius: 1.2rem;
+  text-align: center;
+  align-items: center;
+  border: 1px solid white;
+  gap: 0.8rem;
+}
+
+/* Button */
+.button {
+  border: 2px solid #49a891;
+}
+
+/* Responsive Padding */
+.padding-x {
+  padding-left: 6px;
+  padding-right: 6px;
+}
+
+@media (min-width: 640px) {
+  .padding-x {
+    padding-left: 4px;
+    padding-right: 4px;
+  }
+}
+
+.padding-y {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+@media (min-width: 640px) {
+  .padding-y {
+    padding-top: 16px;
+    padding-bottom: 16px;
+  }
+}
+
+.padding {
+  padding-left: 6px;
+  padding-right: 6px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+@media (min-width: 640px) {
+  .padding {
+    padding-left: 16px;
+    padding-right: 16px;
+    padding-top: 16px;
+    padding-bottom: 16px;
+  }
+}
+
+/* Hero Text */
+.hero-head-text {
+  font-weight: 900;
+  color: white;
+  font-size: 40px;
+  margin-top: 0.5rem;
+}
+
+@media (min-width: 640px) {
+  .hero-head-text {
+    font-size: 50px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .hero-head-text {
+    font-size: 80px;
+  }
+}
+
+/* Hero Subtext */
+.hero-sub-text {
+  color: #dfd9ff;
+  font-weight: 500;
+  font-size: 16px;
+}
+
+@media (min-width: 640px) {
+  .hero-sub-text {
+    font-size: 26px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .hero-sub-text {
+    font-size: 30px;
+  }
+}
+
+/* Section Head Text */
+.section-head-text {
+  color: white;
+  font-weight: 900;
+  font-size: 30px;
+}
+
+@media (min-width: 640px) {
+  .section-head-text {
+    font-size: 40px;
+  }
+}
+
+@media (min-width: 768px) {
+  .section-head-text {
+    font-size: 50px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .section-head-text {
+    font-size: 60px;
+  }
+}
+
+/* Section Subtext */
+.section-sub-text {
+  font-size: 14px;
+  color: #c95bf5;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+@media (min-width: 640px) {
+  .section-sub-text {
+    font-size: 18px;
+  }
+}
+
+.form-container {
+  height: 500px;
+  padding: 30px;
+  margin: 10px;
+  background: rgba(190, 80, 244, 0.13);
+  border-radius: 32px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(8.2px);
+  -webkit-backdrop-filter: blur(8.2px);
+  border: 1px solid rgba(190, 80, 244, 0.20);
+}
+
+.form {
+  margin-top: 1rem; /* mt-3 equivalent */
+  display: flex;
+  flex-direction: column;
+  gap: 2rem; /* gap-8 equivalent */
+}
+
+.form-label {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-label span {
+  color: white;
+  font-weight: 500; /* font-medium equivalent */
+  margin-bottom: 1rem; /* mb-3 equivalent */
+}
+
+.form-input,
+.form-textarea {
+  background-color: var(--tertiary); /* Use a CSS variable or define the color */
+  padding: 1rem;
+  placeholder-color: var(--secondary); /* Use a CSS variable or define the color */
+  color: rgba(190, 80, 244, 0.20);
+  border-radius: 1rem; /* rounded-lg equivalent */
+  border: none;
+  font-weight: 500; /* font-medium equivalent */
+}
+
+.form-textarea {
+  rows: 7;
+}
+
+/* Button Styles */
+.submit-button {
+  background-color: #c95bf5; /* Background color */
+  padding: 1rem 1.25rem; /* Padding */
+  border-radius: 1rem; /* Rounded corners */
+  outline: none; /* Remove outline */
+  color: whitesmoke; /* Text color */
+  font-weight: bold; /* Font weight */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Box shadow */
+  border: 2px solid var(--border-color); /* Optional border for better visibility */
+  width: 100%; /* Adjust to match other components */
+  
+  display: inline-block; /* Flexbox to align icon and text */
+  text-align: center; /* Center text inside the button */
+  cursor: pointer; /* Pointer cursor on hover */
+  transition: background-color 0.3s, box-shadow 0.3s; /* Smooth transition for hover effects */
+}
+/* Icon Styles */
+.submit-button i {
+  font-size: 1.2rem; /* Size of the icon */
+  margin-right: 0.5rem; /* Space between icon and text */
+}
+/* Hover Effect (Optional) */
+.submit-button:hover {
+  background-color: darken( #c95bf5, 10%); /* Darken background on hover */
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2); /* Darker shadow on hover */
+}
+
+/* Active State (Optional) */
+.submit-button:active {
+  background-color: darken( #c95bf5, 15%); /* Darker background on click */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Smaller shadow on click */
+}
+/* Contact Options Container */
+.contact-options {
+  display: flex;
+  gap: 0.5rem; /* Space between items */
+  border: 1px solid #c95bf5; /* Border color */
+  border-radius: 1rem; /* Rounded corners */
+  padding: 0.3rem; /* Padding inside container */
+  margin: 0.5rem;
+}
+
+.contact-option {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem; /* Gap between icon and text */
+}
+/* Icon Styles */
+.contact-options svg {
+    font-size: var(--icon-size); /* Size of icons */
+    color: var(--icon-color); /* Color of icons */
+}
+
+/* Text Styles */
+.contact-options a {
+    color: #007bff; /* Link color */
+    text-decoration: none; /* Remove underline */
+    font-weight: bold; /* Bold text */
+    font-size: 1rem; /* Adjust text size if needed */
+}
+
+.contact-options a:hover {
+    text-decoration: underline; /* Underline on hover */
+}
+.blue-text-gradient {
+  background: linear-gradient(90deg, rgba(0, 136, 255, 1) 0%, rgba(0, 212, 255, 1) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-decoration: none;
+}
+/* Define your color variables */
+:root {
+  --bg-tertiary: rgba(255, 255, 255, 0.6); /* Replace with actual tertiary background color */
+  --text-secondary: #292626; /* Replace with actual secondary text color */
+  --text-white: #292626;
+}
+
+.nameinput {
+  background-color: var(--bg-tertiary);
+  padding: 0.75rem 0.75rem; /* py-3 px-3 in Tailwind translates to 0.75rem padding */
+  color: var(--text-white);
+  border-radius: 0.5rem; /* rounded-lg in Tailwind translates to 0.5rem border-radius */
+  border: none;
+  font-weight: 500; /* font-medium in Tailwind translates to font-weight: 500 */
+}
+
+/* Placeholder color styles */
+.nameinput::placeholder {
+  color: var(--text-secondary);
+}
