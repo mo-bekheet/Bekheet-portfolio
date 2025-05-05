@@ -17,17 +17,7 @@ import "./style.css";
 function Home() {
   const [sessionId, setSessionId] = useState('');
 
-  // useEffect(() => {
-  //   const newSessionId = 'session_' + Date.now();
-  //   setSessionId(newSessionId);
-  //   addResponseMessage('Welcome to our chatbot!');
-  // }, []);
-  // const handleNewUserMessage = async (message) => {
-  //   console.log(`New message from ${sessionId}: ${message}`);
 
-  //   const response = await processWithLangChain(message, sessionId);
-  //   addResponseMessage(response);
-  // };
 
   const processWithLangChain = async (message, sessionId) => {
     const response = `Processed message "${message}" for session: ${sessionId}`;
@@ -41,7 +31,7 @@ function Home() {
         <Container className="home-content">
           <Row>
             <Col md={7} className="home-header">
-              <h1 style={{ paddingBottom: 15 }} className="heading">
+              <h1 style={{paddingBottom: 15}} className="heading">
                 Hi There!{" "}
                 <span className="wave" role="img" aria-labelledby="wave">
                   👋🏻
@@ -57,24 +47,43 @@ function Home() {
                 <Type />
               </div>
               
-              <div className="link1">    
-                  <a href="https://chatwith.io/s/mohamed-bekheet" target="_blank" rel="noopener noreferrer">
+              <div className="social-links-container">    
+                  <a href="https://chatwith.io/s/mohamed-bekheet" 
+                     target="_blank" 
+                     rel="noopener noreferrer"
+                     className="social-link"
+                     data-tooltip="Chat on WhatsApp">
                         <FaWhatsapp />
                   </a>    
-                  <a href="https://github.com/mohamedbakhet" target="_blank" rel="noopener noreferrer">
+                  <a href="https://github.com/mohamedbakhet" 
+                     target="_blank" 
+                     rel="noopener noreferrer"
+                     className="social-link"
+                     data-tooltip="Follow on GitHub">
                     <AiOutlineGithub />
                   </a>
-                  <a href="https://www.linkedin.com/in/mohamedbekheet-/" target="_blank" rel="noopener noreferrer">
+                  <a href="https://www.linkedin.com/in/mohamedbekheet-/" 
+                     target="_blank" 
+                     rel="noopener noreferrer"
+                     className="social-link"
+                     data-tooltip="Connect on LinkedIn">
                     <ImLinkedin />
                   </a>
-                  <a href="https://www.kaggle.com/mohamedbakhet" target="_blank" rel="noopener noreferrer">
+                  <a href="https://www.kaggle.com/mohamedbakhet" 
+                     target="_blank" 
+                     rel="noopener noreferrer"
+                     className="social-link"
+                     data-tooltip="Follow on Kaggle">
                     <SiKaggle />
                   </a>
-                  <a href="https://dev.to/mohamed-bekheet" target="_blank" rel="noopener noreferrer">
+                  <a href="https://dev.to/mohamed-bekheet" 
+                     target="_blank" 
+                     rel="noopener noreferrer"
+                     className="social-link"
+                     data-tooltip="Read on Dev.to">
                     <FaDev />
                   </a>
-
-                </div>
+              </div>
  
             </Col>
 

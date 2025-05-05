@@ -9,17 +9,76 @@ import "react-vertical-timeline-component/style.min.css";
 
 import experiences from "./experiecesContent.js"; 
 import { SectionWrapper } from "../hoc/index.js";
-import { textVariant } from "../utils/motion.js";
 import StarIcon from '@mui/icons-material/Star';
 
 const ExperienceCard = ({ experience }) => {
   return (
     <VerticalTimelineElement
-      contentStyle={{
-        background: "#1d1836",
-        color: "#fff",
-      }}
-      contentArrowStyle={{ borderRight: "7px solid #232631" }} // Fixed CSS value
+// Component styling
+contentStyle={{
+  background: `
+    linear-gradient(
+      145deg,
+      rgba(19, 15, 38, 0.92) 20%,
+      rgba(28, 22, 54, 0.92) 80%
+    )`,
+  backdropFilter: 'blur(16px) saturate(200%)',
+  border: '1px solid rgba(199, 112, 240, 0.15)',
+  boxShadow: `
+    0 0 20px rgba(199, 112, 240, 0.1),
+    inset 0 0 15px rgba(255, 255, 255, 0.05)
+  `,
+  color: '#e8e1ff',
+  position: 'relative',
+  overflow: 'hidden',
+  transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
+  '&:hover': {
+    transform: 'translateY(-5px)',
+    boxShadow: `
+      0 0 35px rgba(199, 112, 240, 0.25),
+      inset 0 0 20px rgba(255, 255, 255, 0.1)
+    `,
+  },
+  '&::before': {
+    content: '""',
+    position: 'absolute',
+    top: '-50%',
+    left: '-50%',
+    width: '200%',
+    height: '200%',
+    background: `
+      linear-gradient(
+        45deg,
+        transparent 45%,
+        rgba(199, 112, 240, 0.1) 50%,
+        transparent 55%
+      )
+    `,
+    animation: 'rotateGlow 12s linear infinite',
+    pointerEvents: 'none',
+  },
+}}
+
+contentArrowStyle={{
+  borderRight: '7px solid rgba(155, 89, 182, 0.4)',
+  filter: 'drop-shadow(0 0 8px rgba(199, 112, 240, 0.3))',
+  '&::before': {
+    content: '""',
+    position: 'absolute',
+    right: '-7px',
+    top: '0',
+    height: '100%',
+    width: '3px',
+    background: `
+      linear-gradient(
+        to bottom,
+        rgba(199, 112, 240, 0.6),
+        rgba(138, 43, 226, 0.6)
+      )
+    `,
+    animation: 'pulseGlow 2s ease-in-out infinite',
+  },
+}}
       date={experience.date}
       iconStyle={{ background: experience.iconBg }}
       icon={
@@ -73,12 +132,12 @@ const ExperienceCard = ({ experience }) => {
 const ExperienceJourney = () => {
   return (
     <>
-      <motion.div id="experience" variants={textVariant()}>
+      <motion.div id="experience">
         <h1 className="project-heading">
           <strong className="purple">Professional </strong>Experience
         </h1>
       </motion.div>
-
+      <motion.div> 
       <div className="mt-20 flex flex-col">
         <VerticalTimeline>
           {experiences.map((experience, index) => (
@@ -93,6 +152,7 @@ const ExperienceJourney = () => {
           />
         </VerticalTimeline>
       </div>
+      </motion.div>
     </>
   );
 };

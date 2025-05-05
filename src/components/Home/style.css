@@ -1,7 +1,6 @@
-
 /* Container Styling */
 .link1 {
-  position: relative; /* Changed from absolute to relative */
+  position: absolute ; /* Changed from absolute to relative */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -10,7 +9,8 @@
   padding: 15px;
   border-radius: 20px; /* Adjusted border-radius */
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5);
-
+  margin-left: 50px;
+  margin: 10px;
   z-index: 20; /* Ensures container is on top */
 }
 
@@ -312,7 +312,7 @@
   padding: 1rem;
   placeholder-color: var(--secondary); /* Use a CSS variable or define the color */
   color: rgba(190, 80, 244, 0.20);
-  border-radius: 1rem; /* rounded-lg equivalent */
+  border-radius: 2rem; /* rounded-lg equivalent */
   border: none;
   font-weight: 500; /* font-medium equivalent */
 }
@@ -325,7 +325,7 @@
 .submit-button {
   background-color: #c95bf5; /* Background color */
   padding: 1rem 1.25rem; /* Padding */
-  border-radius: 1rem; /* Rounded corners */
+  border-radius: 2rem; /* Rounded corners */
   outline: none; /* Remove outline */
   color: whitesmoke; /* Text color */
   font-weight: bold; /* Font weight */
@@ -354,61 +354,296 @@
   background-color: darken( #c95bf5, 15%); /* Darker background on click */
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Smaller shadow on click */
 }
-/* Contact Options Container */
-.contact-options {
-  display: flex;
-  gap: 0.5rem; /* Space between items */
-  border: 1px solid #c95bf5; /* Border color */
-  border-radius: 1rem; /* Rounded corners */
-  padding: 0.3rem; /* Padding inside container */
-  margin: 0.5rem;
-}
-
+/* Contact Option - Galaxy Glass Style */
 .contact-option {
   display: flex;
+  flex-direction: row;
+  padding: 0.8rem 1.2rem;
+  border-radius: 1.5rem;
   align-items: center;
-  gap: 0.5rem; /* Gap between icon and text */
-}
-/* Icon Styles */
-.contact-options svg {
-    font-size: var(--icon-size); /* Size of icons */
-    color: var(--icon-color); /* Color of icons */
-}
-
-/* Text Styles */
-.contact-options a {
-    color: #007bff; /* Link color */
-    text-decoration: none; /* Remove underline */
-    font-weight: bold; /* Bold text */
-    font-size: 1rem; /* Adjust text size if needed */
+  border: 1px solid rgba(199, 112, 240, 0.3);
+  background: rgba(19, 15, 38, 0.4);
+  backdrop-filter: blur(8px);
+  gap: 1rem;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.contact-options a:hover {
-    text-decoration: underline; /* Underline on hover */
+.contact-option:hover {
+  border-color: rgba(199, 112, 240, 0.6);
+  box-shadow: 0 0 15px rgba(199, 112, 240, 0.2);
+  transform: translateY(-2px);
 }
-.blue-text-gradient {
-  background: linear-gradient(90deg, rgba(0, 136, 255, 1) 0%, rgba(0, 212, 255, 1) 100%);
+
+/* Enhanced Button Styles */
+.button {
+  border: 2px solid rgba(199, 112, 240, 0.5);
+  background: rgba(19, 15, 38, 0.3);
+  color: #e8dfff;
+  backdrop-filter: blur(8px);
+  transition: all 0.3s ease;
+}
+
+.button:hover {
+  background: linear-gradient(145deg, 
+    rgba(199, 112, 240, 0.2) 0%,
+    rgba(138, 43, 226, 0.2) 100%
+  );
+  border-color: rgba(199, 112, 240, 0.8);
+}
+
+/* Cosmic Typography */
+.hero-head-text {
+  background: linear-gradient(135deg, #e8dfff 0%, #c770f0 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  text-decoration: none;
+  text-shadow: 0 0 25px rgba(199, 112, 240, 0.3);
+  font-weight: 900;
+  font-size: 2.5rem;
+  margin-top: 0.5rem;
 }
-/* Define your color variables */
+
+.hero-sub-text {
+  color: rgba(232, 225, 255, 0.9);
+  font-weight: 500;
+  font-size: 1.1rem;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.section-head-text {
+  background: linear-gradient(135deg, #e8dfff 0%, #c770f0 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 900;
+  font-size: 2rem;
+}
+
+.section-sub-text {
+  color: rgba(199, 112, 240, 0.8);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+/* Galactic Form Styles */
+.form-container {
+  background: rgba(19, 15, 38, 0.85);
+  backdrop-filter: blur(12px) saturate(180%);
+  border: 1px solid rgba(199, 112, 240, 0.2);
+  box-shadow: 0 8px 32px rgba(199, 112, 240, 0.1);
+}
+.form-input,
+.form-textarea {
+  background: rgba(28, 22, 54, 0.6); /* Darker background for better contrast */
+  color: #f0e6ff; /* Brighter lavender for readability */
+  border: 1px solid rgba(199, 112, 240, 0.3);
+  transition: all 0.3s ease;
+  padding: 1rem 1.5rem;
+  border-radius: 1rem;
+  font-size: 1rem;
+  
+  /* Add subtle inner glow */
+  box-shadow: 
+    inset 0 1px 2px rgba(255, 255, 255, 0.05),
+    inset 0 0 8px rgba(199, 112, 240, 0.1);
+}
+
+/* Placeholder styling */
+.form-input::placeholder,
+.form-textarea::placeholder {
+  color: rgba(199, 112, 240, 0.4);
+  font-weight: 300;
+}
+
+/* Focus states with animated glow */
+.form-input:focus,
+.form-textarea:focus {
+  border-color: rgba(199, 112, 240, 0.8);
+  box-shadow: 
+    0 0 20px rgba(199, 112, 240, 0.3),
+    inset 0 1px 2px rgba(255, 255, 255, 0.1);
+  background: rgba(28, 22, 54, 0.8);
+  outline: none;
+  animation: input-glow 1.5s ease-in-out infinite alternate;
+}
+
+@keyframes input-glow {
+  from {
+    box-shadow: 
+      0 0 10px rgba(199, 112, 240, 0.2),
+      inset 0 1px 2px rgba(255, 255, 255, 0.05);
+  }
+  to {
+    box-shadow: 
+      0 0 25px rgba(199, 112, 240, 0.4),
+      inset 0 1px 3px rgba(255, 255, 255, 0.1);
+  }
+}
+/* Stellar Submit Button */
+.submit-button {
+  background: linear-gradient(145deg, 
+    rgba(201, 91, 245, 0.9) 0%,
+    rgba(138, 43, 226, 0.9) 100%
+  );
+  border: none;
+  backdrop-filter: blur(8px);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.submit-button:hover {
+  transform: scale(1.02);
+  box-shadow: 0 0 25px rgba(199, 112, 240, 0.4);
+}
+
+/* Cosmic Contact Options */
+.contact-options {
+  background: rgba(19, 15, 38, 0.6);
+  border: 1px solid rgba(199, 112, 240, 0.3);
+  backdrop-filter: blur(8px);
+}
+
+.blue-text-gradient {
+  background: linear-gradient(90deg, 
+    rgba(199, 112, 240, 0.9) 0%,
+    rgba(138, 43, 226, 0.9) 100%
+  );
+}
+
+/* Responsive Design Adjustments */
+@media (min-width: 640px) {
+  .hero-head-text { font-size: 3.5rem; }
+  .hero-sub-text { font-size: 1.5rem; }
+  .section-head-text { font-size: 2.5rem; }
+}
+
+@media (min-width: 1024px) {
+  .hero-head-text { font-size: 4.5rem; }
+  .hero-sub-text { font-size: 1.75rem; }
+  .section-head-text { font-size: 3rem; }
+}
+
+/* Universal Transitions */
+.padding-x, .padding-y, .padding {
+  transition: padding 0.3s ease;
+}
+/* Updated Galaxy Glass color variables */
 :root {
-  --bg-tertiary: rgba(255, 255, 255, 0.6); /* Replace with actual tertiary background color */
-  --text-secondary: #292626; /* Replace with actual secondary text color */
-  --text-white: #292626;
+  --bg-tertiary: #272D48; /* Dark purple with transparency */
+  --text-secondary: rgba(232, 225, 255, 0.7); /* Soft lavender */
+  --text-white: #e8dfff; /* Cosmic white */
+  --accent-purple: rgba(199, 112, 240, 0.8); /* Brand purple */
 }
 
 .nameinput {
   background-color: var(--bg-tertiary);
-  padding: 0.75rem 0.75rem; /* py-3 px-3 in Tailwind translates to 0.75rem padding */
+  padding: 0.75rem;
   color: var(--text-white);
-  border-radius: 0.5rem; /* rounded-lg in Tailwind translates to 0.5rem border-radius */
-  border: none;
-  font-weight: 500; /* font-medium in Tailwind translates to font-weight: 500 */
+  border-radius: 0.5rem;
+  border: 1px solid rgba(199, 112, 240, 0.2); /* Purple border */
+  font-weight: 500;
+  backdrop-filter: blur(8px);
+  transition: all 0.3s ease;
 }
 
-/* Placeholder color styles */
+.nameinput:hover {
+  border-color: var(--accent-purple);
+}
+
+.nameinput:focus {
+  outline: none;
+  box-shadow: 0 0 15px rgba(199, 112, 240, 0.2);
+  border-color: var(--accent-purple);
+}
+
+/* Placeholder styling */
 .nameinput::placeholder {
-  color: var(--text-secondary);
+  color: rgba(232, 225, 255, 0.5); /* Semi-transparent lavender */
+  letter-spacing: 0.05em;
+}
+
+.nameinput:focus::placeholder {
+  color: rgba(232, 225, 255, 0.3);
+}
+
+/* Social Links Styling */
+.social-links-container {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 1.5rem;
+  margin: 2.5rem;
+  flex-wrap: wrap;
+}
+
+.social-link {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 1rem;
+  background: rgba(199, 112, 240, 0.1);
+  color: #e8dfff;
+  font-size: 1.5rem;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 1px solid rgba(199, 112, 240, 0.2);
+}
+
+.social-link:hover {
+  background: linear-gradient(145deg, rgba(199, 112, 240, 0.2), rgba(138, 43, 226, 0.2));
+  transform: translateY(-4px);
+  border-color: rgba(199, 112, 240, 0.6);
+  box-shadow: 0 4px 12px rgba(199, 112, 240, 0.3);
+  color: #c770f0;
+}
+
+.social-link::before {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: -40px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  background: rgba(29, 24, 54, 0.95);
+  color: #e8dfff;
+  white-space: nowrap;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(199, 112, 240, 0.2);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.social-link:hover::before {
+  opacity: 1;
+  visibility: visible;
+  bottom: -50px;
+}
+
+@media (max-width: 768px) {
+  .social-links-container {
+    justify-content: center;
+    gap: 1rem;
+  }
+  
+  .social-link {
+    width: 3rem;
+    height: 3rem;
+    font-size: 1.25rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .social-link::before {
+    display: none;
+  }
+  
+  .social-link {
+    width: 2.75rem;
+    height: 2.75rem;
+    font-size: 1.125rem;
+    border-radius: 0.75rem;
+  }
 }

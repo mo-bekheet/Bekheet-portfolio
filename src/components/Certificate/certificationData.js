@@ -6,8 +6,29 @@ import aws from "../../Assets/certifications/aws.png";
 import gen from "../../Assets/certifications/gen.png";
 import ibm from "../../Assets/certifications/ibm.png";
 import DL from "../../Assets/certifications/DL.png";
+import awssa from "../../Assets/certifications/aws_sa.png";
+import hccdpai from "../../Assets/certifications/HCCDP-AI.jpeg";
 
 export const certifications = [
+  {
+    title: "AWS Solution Architect Associate",
+    img: awssa,
+    alt: "AWS Solutions Architect Associate Certification",
+    link: "https://www.credly.com/badges/4343705f74e048e7bf6eb4ba4bcb3256",
+    description: "AWS Certified Solutions Architect - Associate demonstrates knowledge and skills in AWS technology, across a wide range of AWS services. The focus is on designing distributed systems that are cost-efficient, reliable, and scalable.",
+    issueDate: "Mar 2025",
+    expiryDate: "Mar 2028",
+    credentialId: "4343705f74e048e7bf6eb4ba4bcb3256"
+  },
+  {
+    title: "HCCDP-AI",
+    img: hccdpai,
+    alt: "Huawei Certified Cloud Database Professional - AI",
+    link: "#",
+    description: "Huawei Certified Cloud Database Professional certification in AI demonstrates expertise in Huawei's cloud AI technologies and solutions.",
+    issueDate: "Mar 2025",
+    credentialId: "HWENDCAIDP207018"
+  },
   {
     title: "Associate Cloud Engineer",
     img: gcp,
@@ -15,6 +36,7 @@ export const certifications = [
     link: "https://www.credly.com/badges/004eae16-08b7-4598-b64b-05f57170e0c0",
     description:
       "Associate Cloud Engineers deploy applications, monitor operations, and manage enterprise solutions. They use Google Cloud Console and the command-line interface to perform common platform-based tasks to maintain one or more deployed solutions that leverage Google-managed or self-managed services on Google Cloud.",
+    issueDate: "Jan 2024"
   },
   {
     title: "Azure Data Scientist Associate",
@@ -31,6 +53,8 @@ export const certifications = [
     link: "https://www.credly.com/badges/3b67bdfb-93e0-4611-96c6-899506559896",
     description:
       "Earners of this certification have an in-depth understanding of AWS machine learning (ML) services. They demonstrated ability to build, train, tune, and deploy ML models using the AWS Cloud. Badge owners can derive insight from AWS ML services using either pretrained models or custom models built from open-source frameworks.",
+    issueDate: "Dec 2023",
+    expiryDate: "Dec 2026"
   },
   {
     title: "AWS Certified Cloud Practitioner",

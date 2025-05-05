@@ -71,6 +71,9 @@ const Contact = () => {
     <Container>
       <Row>
         <Col md={6}>
+        <br/>
+        <br/>
+        <br/>
           <motion.div
             variants={slideIn("left", "tween", 0.2, 1)}
             className="w-300 h-300"

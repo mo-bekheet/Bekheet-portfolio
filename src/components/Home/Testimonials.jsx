@@ -12,13 +12,19 @@ const imgStyle = {
 const imgStyle2 = {
   width: '70px',
   height: '70px',
- 
+  margin: '40px',
+  borderRadius: '50%',
+  border: '2px solid #c770f0',
+  transition: 'transform 0.3s ease-in-out',
+  '&:hover': {
+    transform: 'scale(1.1)'
+  }
 };
 
 const CustomArrow = ({ className, style, onClick }) => (
   <div
     className={className}
-    style={{ ...style, display: 'block', background: 'gray' }}
+    style={{ ...style, display: 'block'}}
     onClick={onClick}
   />
 );
@@ -30,8 +36,20 @@ const Testimonials = () => {
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
-    nextArrow: <CustomArrow className="slick-next" />, // Use CustomArrow component
-    prevArrow: <CustomArrow className="slick-prev" />, // Use CustomArrow component
+    autoplay: true,
+    autoplaySpeed: 3000,
+    pauseOnHover: true,
+    arrows: true,
+    nextArrow: <CustomArrow className="slick-next" />,
+    prevArrow: <CustomArrow className="slick-prev" />,
+    responsive: [ // Optional: Add responsive breakpoints
+      {
+        breakpoint: 768,
+        settings: {
+          arrows: false
+        }
+      }
+    ]
   };
 
   const testimonials = [
@@ -85,6 +103,17 @@ const Testimonials = () => {
       profession: 'Business Intelligence | Big Data | Data Engineer | CDMP | AWS 2x Certified | Microsoft 1x | Denodo 1x',
       delay: 1.1,
     },
+    {
+      id: 6,
+      imgSrc: '/Testimonial/img6.jpg',
+      link: 'https://www.linkedin.com/in/eslamelassal/',
+      quote:
+        "I enjoyed working with Bekheet during my master’s degree and in a professional setting while working in Forte Cloud. He is deeply dedicated to his work, sometimes to a fault, and consistently strives to think outside the box, bringing creative ideas that drive progress. What truly sets him apart is his unwavering passion for gaining knowledge and continuously improving himself.",
+      clientName: 'Mohamed Elesawy',
+      profession: 'Machine Learning Engineer @ FORTE CLOUD | Machine Learning',
+      delay: 1.1,
+    },
+    
   ];
  
   return (
@@ -99,17 +128,17 @@ const Testimonials = () => {
         </h1>
         <div className="row justify-content-center">
           <div className="col-lg-3 d-none d-lg-block">
-            <div className="testimonial-left h-100">
-              {testimonials.map((testimonial) => (
-                <img
-                  key={testimonial.id}
-                  className="img-fluid wow fadeIn"
-                  data-wow-delay={testimonial.delay}
-                  src={testimonial.imgSrc}
-                  style={imgStyle2}
-                  
-                  alt=""
-                />
+            <div className="testimonial-left h-100" style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '10px' }}>
+              {testimonials.slice(0, Math.ceil(testimonials.length / 2)).map((testimonial) => (
+                <a key={testimonial.id} href={testimonial.link} target="_blank" rel="noopener noreferrer">
+                  <img
+                    className="img-fluid wow fadeIn"
+                    data-wow-delay={testimonial.delay}
+                    src={testimonial.imgSrc}
+                    style={imgStyle2}
+                    alt={testimonial.clientName}
+                  />
+                </a>
               ))}
             </div>
           </div>
@@ -147,16 +176,17 @@ const Testimonials = () => {
             </Slider>
           </div>
           <div className="col-lg-3 d-none d-lg-block">
-            <div className="testimonial-right h-100">
-              {testimonials.map((testimonial) => (
-                <img
-                  key={testimonial.id}
-                  className="img-fluid wow fadeIn"
-                  data-wow-delay={testimonial.delay}
-                  src={testimonial.imgSrc}
-                  style={imgStyle2}
-                  alt=""
-                />
+            <div className="testimonial-right h-100" style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: '20px' }}>
+              {testimonials.slice(Math.ceil(testimonials.length / 2)).map((testimonial) => (
+                <a key={testimonial.id} href={testimonial.link} target="_blank" rel="noopener noreferrer">
+                  <img
+                    className="img-fluid wow fadeIn"
+                    data-wow-delay={testimonial.delay}
+                    src={testimonial.imgSrc}
+                    style={imgStyle2}
+                    alt={testimonial.clientName}
+                  />
+                </a>
               ))}
             </div>
           </div>

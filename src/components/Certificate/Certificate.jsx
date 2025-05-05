@@ -23,43 +23,31 @@ export default function ProjectPage() {
                       {certifications.map((cert, index) => (
                         <Col key={index} md={3} className="col-sm-12 col-md-4">
                           <Fade bottom>
-                            <a
-                              href={cert.link}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              style={{ textDecoration: "none", color: "inherit" }}
-                            >
-                              <div
-                                className="singleProject"
-                                style={{
-                                  backgroundColor: "rgb(142 70 186 / 31%)",
-                                  border: "1px solid",
-                                }}
+                            <div className="galaxy-glass-card">
+                              <a
+                                href={cert.link}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="certification-link"
                               >
-                                <div className="projectContent">
-                                  <h5 style={{ color: "whitesmoke" }}>
-                                    {cert.title}
-                                  </h5>
-                                  <img
-                                    src={cert.img}
-                                    alt={cert.alt}
-                                    style={{ height: "250px" }}
-                                  />
+                                <div className="singleProject">
+                                  <div className="projectContent">
+                                    <h5 className="cert-title">{cert.title}</h5>
+                                    <img
+                                      src={cert.img}
+                                      alt={cert.alt}
+                                      className="cert-image"
+                                    />
+
+                                  </div>
+                                  <div className="project--desc">
+                                    <p className="cert-description">
+                                      {cert.description}
+                                    </p>
+                                  </div>
                                 </div>
-                                <h6>
-                                  <p
-                                    className="project--desc"
-                                    style={{
-                                      background: "whitesmoke",
-                                      color: "#c95bf5",
-                                      fontWeight: 600,
-                                    }}
-                                  >
-                                    {cert.description}
-                                  </p>
-                                </h6>
-                              </div>
-                            </a>
+                              </a>
+                            </div>
                           </Fade>
                         </Col>
                       ))}
