@@ -1,0 +1,180 @@
+.agent-avatar-container {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.agent-avatar {
+  position: relative;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #c770f0 0%, #8e2de2 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(199, 112, 240, 0.3);
+  cursor: pointer;
+}
+
+.agent-avatar::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: 50%;
+  background: linear-gradient(45deg, transparent, rgba(199, 112, 240, 0.3));
+  animation: rotate 4s linear infinite;
+  z-index: -1;
+}
+
+.agent-icon {
+  width: 65%;
+  height: 65%;
+  color: white;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+  transition: transform 0.3s ease;
+}
+
+.agent-avatar:hover .agent-icon {
+  transform: scale(1.1);
+}
+
+.agent-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.status-indicator {
+  position: absolute;
+  bottom: 2px;
+  right: 2px;
+  width: 12px;
+  height: 12px;
+  background-color: #4CAF50;
+  border-radius: 50%;
+  border: 2px solid white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.pulse-ring {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: rgba(199, 112, 240, 0.2);
+  border: 2px solid rgba(199, 112, 240, 0.3);
+}
+
+/* Size variations */
+.agent-avatar.small {
+  width: 40px;
+  height: 40px;
+}
+
+.agent-avatar.medium {
+  width: 60px;
+  height: 60px;
+}
+
+.agent-avatar.large {
+  width: 80px;
+  height: 80px;
+}
+
+/* Agent type specific styles */
+.agent-avatar.support {
+  background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+}
+
+.agent-avatar.support::before {
+  background: linear-gradient(45deg, transparent, rgba(76, 175, 80, 0.3));
+}
+
+.agent-avatar.support .pulse-ring {
+  background: rgba(76, 175, 80, 0.2);
+  border-color: rgba(76, 175, 80, 0.3);
+}
+
+.agent-avatar.sales {
+  background: linear-gradient(135deg, #2196F3 0%, #1976D2 100%);
+}
+
+.agent-avatar.sales::before {
+  background: linear-gradient(45deg, transparent, rgba(33, 150, 243, 0.3));
+}
+
+.agent-avatar.sales .pulse-ring {
+  background: rgba(33, 150, 243, 0.2);
+  border-color: rgba(33, 150, 243, 0.3);
+}
+
+.agent-avatar.general {
+  background: linear-gradient(135deg, #c770f0 0%, #8e2de2 100%);
+}
+
+.agent-avatar.general::before {
+  background: linear-gradient(45deg, transparent, rgba(199, 112, 240, 0.3));
+}
+
+.agent-avatar.general .pulse-ring {
+  background: rgba(199, 112, 240, 0.2);
+  border-color: rgba(199, 112, 240, 0.3);
+}
+
+/* Animations */
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Hover effects */
+.agent-avatar:hover {
+  box-shadow: 0 6px 20px rgba(199, 112, 240, 0.4);
+}
+
+.agent-avatar:hover .status-indicator {
+  animation: pulse 1.5s infinite;
+}
+
+.agent-avatar.support:hover {
+  box-shadow: 0 6px 20px rgba(76, 175, 80, 0.4);
+}
+
+.agent-avatar.sales:hover {
+  box-shadow: 0 6px 20px rgba(33, 150, 243, 0.4);
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(76, 175, 80, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(76, 175, 80, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(76, 175, 80, 0);
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 480px) {
+  .agent-avatar.large {
+    width: 60px;
+    height: 60px;
+  }
+  
+  .agent-avatar.medium {
+    width: 50px;
+    height: 50px;
+  }
+  
+  .agent-avatar.small {
+    width: 35px;
+    height: 35px;
+  }
+} 

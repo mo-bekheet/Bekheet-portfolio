@@ -207,6 +207,23 @@
   cursor: pointer;
   z-index: 1000;
   box-shadow: 0 4px 15px rgba(199, 112, 240, 0.3);
+  transition: all 0.3s ease;
+}
+
+.chatbot-toggle .bot-icon {
+  width: 30px;
+  height: 30px;
+  color: white;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+}
+
+.chatbot-toggle:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 20px rgba(199, 112, 240, 0.4);
+}
+
+.chatbot-toggle:hover .bot-icon {
+  transform: scale(1.1);
 }
 
 .typing-indicator {

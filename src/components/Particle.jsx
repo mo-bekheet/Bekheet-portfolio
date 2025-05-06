@@ -18,10 +18,11 @@ const Particle = () => {
             <Particles
                 id="tsparticles"
                 options={{
+                    fullScreen: false,
                     background: {
-                        color: "#0d47a1",
+                        color: "transparent",
                     },
-                    fpsLimit: 120,
+                    fpsLimit: 60,
                     interactivity: {
                         events: {
                             onClick: {
@@ -46,10 +47,10 @@ const Particle = () => {
                     },
                     particles: {
                         color: {
-                            value: "#ffffff",
+                            value: "#c770f0",
                         },
                         links: {
-                            color: "#ffffff",
+                            color: "#c770f0",
                             distance: 150,
                             enable: true,
                             opacity: 0.5,
@@ -62,7 +63,7 @@ const Particle = () => {
                                 default: "bounce",
                             },
                             random: false,
-                            speed: 6,
+                            speed: 2,
                             straight: false,
                         },
                         number: {
@@ -83,6 +84,17 @@ const Particle = () => {
                         },
                     },
                     detectRetina: true,
+                    style: {
+                        position: "fixed",
+                        width: "100%",
+                        height: "100%",
+                        top: 0,
+                        left: 0,
+                        margin: 0,
+                        padding: 0,
+                        zIndex: -1,
+                        pointerEvents: "none"
+                    }
                 }}
             />
         )

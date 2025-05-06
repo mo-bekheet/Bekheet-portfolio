@@ -125,7 +125,7 @@ const Chatbot = () => {
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
       >
-        <FaRobot />
+        <FaRobot className="bot-icon"/>
       </motion.button>
     </>
   );

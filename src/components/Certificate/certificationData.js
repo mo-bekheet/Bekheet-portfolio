@@ -1,13 +1,13 @@
 // certificationData.js
-import gcp from "../../Assets/certifications/GCP.png";
-import azure from "../../Assets/certifications/dp100.svg";
-import awsml from "../../Assets/certifications/aws_ml.png";
-import aws from "../../Assets/certifications/aws.png";
-import gen from "../../Assets/certifications/gen.png";
-import ibm from "../../Assets/certifications/ibm.png";
-import DL from "../../Assets/certifications/DL.png";
-import awssa from "../../Assets/certifications/aws_sa.png";
-import hccdpai from "../../Assets/certifications/HCCDP-AI.jpeg";
+import gcp from "../../assets/certifications/GCP.png";
+import azure from "../../assets/certifications/dp100.svg";
+import awsml from "../../assets/certifications/aws_ml.png";
+import aws from "../../assets/certifications/aws.png";
+import gen from "../../assets/certifications/gen.png";
+import ibm from "../../assets/certifications/ibm.png";
+import DL from "../../assets/certifications/DL.png";
+import awssa from "../../assets/certifications/aws_sa.png";
+import hccdpai from "../../assets/certifications/HCCDP-AI.jpeg";
 
 export const certifications = [
   {

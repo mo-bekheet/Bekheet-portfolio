@@ -12,7 +12,7 @@ import Projects from "./components/Projects/Projects.jsx";
 import Game from "./components/play/Game.jsx";
 import Footer from "./components/Footer.jsx";
 import Chatbot from "./components/chatEngine/index.jsx";
-// import Particle from "./components/utils/Particle.jsx";
+import Particle from "./components/Particle.jsx";
 
 function App() {
   const [load, updateLoad] = useState(true);
@@ -31,7 +31,7 @@ function App() {
       <div className="App" id={load ? "no-scroll" : "scroll"}>
         <Navbar />
         <ScrollToTop />
-        {/* <Particle /> */}
+        <Particle />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/play" element={<Game />} />
