@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FaRobot, FaTimes, FaPaperPlane } from 'react-icons/fa';
-import ChatMessage from './ChatMessage';
+import ChatMessage from './ChatMessage.tsx';
 import ChatService from './ChatService';
 import './ChatBot.css';
 

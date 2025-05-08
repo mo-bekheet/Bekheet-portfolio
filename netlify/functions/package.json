@@ -1,7 +1,14 @@
 {
   "name": "netlify-functions",
   "version": "1.0.0",
+  "engines": {
+    "node": ">=18.0.0"
+  },
   "dependencies": {
     "node-fetch": "^2.6.1"
+  },
+  "type": "commonjs",
+  "devDependencies": {
+    "shx": "^0.4.0"
   }
 }

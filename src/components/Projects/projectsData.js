@@ -1,13 +1,13 @@
 // projectsData.js
-import redshift from "../../assets/Projects/redshift.png";
-import cgen from "../../assets/Projects/cgen.png";
-import sentiment from "../../assets/Projects/sentiment.png";
-import emr from "../../assets/Projects/emr.png";
-import amazon from "../../assets/Projects/amazon.png";
-import coptic from "../../assets/Projects/coptic.png";
-import ocr from "../../assets/Projects/ocr.png";
-import postg from "../../assets/Projects/postg.png";
-import cassandra from "../../assets/Projects/cassandra.png";
+import redshift from "../../Assets/Projects/redshift.png";
+import cgen from "../../Assets/Projects/cgen.png";
+import sentiment from "../../Assets/Projects/sentiment.png";
+import emr from "../../Assets/Projects/emr.png";
+import amazon from "../../Assets/Projects/amazon.png";
+import coptic from "../../Assets/Projects/coptic.png";
+import ocr from "../../Assets/Projects/ocr.png";
+import postg from "../../Assets/Projects/postg.png";
+import cassandra from "../../Assets/Projects/cassandra.png";
 
 export const projectData = [
   {

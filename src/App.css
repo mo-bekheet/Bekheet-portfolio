@@ -52,22 +52,6 @@ body {
   }
 }
 
-html {
-  --section-background-color: linear-gradient(
-    to bottom left,
-    rgba(17, 16, 16, 0.582),
-    rgba(12, 8, 24, 0.904)
-  );
-
-  --image-gradient: linear-gradient(
-    to bottom left,
-    rgba(17, 16, 16, 0.678),
-    rgba(12, 10, 22, 0.863)
-  );
-
-  --imp-text-color: #c770f0;
-}
-
 .purple {
   color: var(--imp-text-color) !important;
 }
@@ -87,7 +71,7 @@ button:focus {
   height: 100%;
   z-index: 999999;
   background-color: #0c0513;
-  background-image: url(./assets/pre.svg);
+  background-image: url(./Assets/pre.svg);
   background-repeat: no-repeat;
   background-position: center;
 }
@@ -484,7 +468,7 @@ button:focus {
 .home-section {
   position: relative;
   z-index: 0;
-  background-image: var(--image-gradient), url(./assets/home-bg.jpg);
+  background-image: var(--image-gradient), url(./Assets/home-bg.jpg);
   background-position: top center;
   background-repeat: no-repeat;
   padding-bottom: 50px !important; /* Increased padding */
@@ -633,7 +617,6 @@ button:focus {
 .footer {
   position: relative;
   width: 100%;
-  background: linear-gradient(to bottom, transparent, rgba(10, 4, 22, 0.95));
   overflow: hidden;
   margin-top: 4rem;
 }
@@ -644,7 +627,7 @@ button:focus {
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(29, 24, 54, 0.65);
+  background: rgba(29, 24, 54, 1);
   -webkit-backdrop-filter: blur(12px) saturate(180%);
   backdrop-filter: blur(12px) saturate(180%);
   z-index: 0;
