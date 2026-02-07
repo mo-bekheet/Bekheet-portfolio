@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { FaRobot, FaTimes, FaPaperPlane } from 'react-icons/fa';
 import ChatMessage from './ChatMessage.tsx';
 import ChatService from './ChatService';
+import AgentAvatar from './AgentAvatar';
 import './ChatBot.css';
 
 const INITIAL_MESSAGE = "Hi! I'm your AI assistant. How can I help you today?";
@@ -125,7 +126,7 @@ const Chatbot = () => {
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
       >
-        <FaRobot className="bot-icon"/>
+        <AgentAvatar size="medium" agentType="general" isOnline={true} />
       </motion.button>
     </>
   );

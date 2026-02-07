@@ -9,13 +9,13 @@ const SocialLinks = () => (
     <a href="https://chatwith.io/s/mohamed-bekheet" target="_blank" rel="noopener noreferrer" className="icon-circle">
       <FaWhatsapp />
     </a>
-    <a href="https://github.com/mohamedbakhet" target="_blank" rel="noopener noreferrer" className="icon-circle">
+    <a href="https://github.bekheet.com" target="_blank" rel="noopener noreferrer" className="icon-circle">
       <AiOutlineGithub />
     </a>
-    <a href="https://www.linkedin.com/in/mohamedbekheet-/" target="_blank" rel="noopener noreferrer" className="icon-circle">
+    <a href="https://linkedin.bekheet.com" target="_blank" rel="noopener noreferrer" className="icon-circle">
       <ImLinkedin />
     </a>
-    <a href="https://www.kaggle.com/mohamedbakhet" target="_blank" rel="noopener noreferrer" className="icon-circle">
+    <a href="https://kaggle.bekheet.com" target="_blank" rel="noopener noreferrer" className="icon-circle">
       <SiKaggle />
     </a>
     <a href="https://dev.to/mohamed-bekheet" target="_blank" rel="noopener noreferrer" className="icon-circle">
@@ -32,7 +32,7 @@ const Footer = () => {
         <div className="footer-content">
           <p className="footer-text">
             Crafted with 💜 by
-            <a href="https://github.com/mohamedbakhet" target="_blank" rel="noopener noreferrer">
+            <a href="https://github.bekheet.com" target="_blank" rel="noopener noreferrer">
               {" "}Mohamed Bekheet
             </a>
           </p>

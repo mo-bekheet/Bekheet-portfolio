@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { FaRobot, FaHeadset, FaUserTie } from 'react-icons/fa';
+import { FaRobot, FaHeadset, FaUserTie, FaBrain } from 'react-icons/fa';
 import './AgentAvatar.css';
 
 interface AgentAvatarProps {
@@ -28,8 +28,10 @@ const AgentAvatar: React.FC<AgentAvatarProps> = ({
         return <FaHeadset className="agent-icon" />;
       case 'sales':
         return <FaUserTie className="agent-icon" />;
+      case 'general':
+        return <FaBrain className="agent-icon" />;
       default:
-        return <FaRobot className="agent-icon" />;
+        return <FaBrain className="agent-icon" />;
     }
   };
 

@@ -11,7 +11,7 @@ function AboutCard() {
             Hi Everyone, I’m <span className="purple">Mohamed Bekheet Abdelall </span> 
             from <span className="purple">Cairo, Egypt.</span>
             <br />
-            I am currently working as a <span className="purple">Machine Learning Engineer</span> at <span className="purple">FORTE CLOUD</span>.
+            I am a <span className="purple">Machine Learning Engineer</span> specializing in AI and Data Science solutions.
             <br />
             My mission is to harness the power of <span className="purple">AI</span> to enhance and simplify our lives. I specialize in <span className="purple">generative AI techniques</span>, including <span className="purple">Retrieval-Augmented Generation (RAG) systems</span>, and other machine learning solutions such as <span className="purple">computer vision</span>, <span className="purple">natural language processing</span>, and <span className="purple">more</span>.
             <br />

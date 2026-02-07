@@ -53,7 +53,7 @@ body {
 }
 
 .purple {
-  color: var(--imp-text-color) !important;
+  color: #c770f0 !important;
 }
 
 button:focus {
