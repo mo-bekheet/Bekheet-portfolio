@@ -7,7 +7,7 @@ import { motion } from "framer-motion";
 
 import "react-vertical-timeline-component/style.min.css";
 
-import experiences from "./experiecesContent.js"; 
+import { experiences } from '../../content/index.js';
 import { SectionWrapper } from "../hoc/index.js";
 import StarIcon from '@mui/icons-material/Star';
 
@@ -79,13 +79,13 @@ contentArrowStyle={{
     animation: 'pulseGlow 2s ease-in-out infinite',
   },
 }}
-      date={experience.date}
-      iconStyle={{ background: experience.iconBg }}
+      date={experience.duration}
+      iconStyle={{ background: experience.backgroundColor }}
       icon={
         <div className="vertical-timeline-element-icon flex justify-center items-center w-full h-full">
           <img
-            src={experience.icon}
-            alt={experience.company_name}
+            src={experience.logo}
+            alt={experience.company}
             style={{ width: "100%", height: "100%" }}
           />
         </div>
@@ -99,23 +99,23 @@ contentArrowStyle={{
           className="text-secondary text-[16px] font-semibold"
           style={{ margin: 0 }}
         >
-          {experience.company_name}
+          {experience.company}
         </p>
       </div>
 
       <ul className="mt-5 list-disc ml-5 space-y-2">
-        {experience.points.map((point, index) => (
+        {experience.achievements.map((achievement, index) => (
           <li
             key={`experience-point-${index}`}
             className="text-white-100 text-[14px] pl-1 tracking-wider"
           >
-            {point}
+            {achievement}
           </li>
         ))}
-        {experience.link && (
+        {experience.website && (
           <div className="flex justify-center items-center">
             <a
-              href={experience.link}
+              href={experience.website}
               target="_blank"
               rel="noopener noreferrer"
               className="no-underline inline-block"
@@ -137,7 +137,7 @@ const ExperienceJourney = () => {
           <strong className="purple">Professional </strong>Experience
         </h1>
       </motion.div>
-      <motion.div> 
+      <motion.div>
       <div className="mt-20 flex flex-col">
         <VerticalTimeline>
           {experiences.map((experience, index) => (

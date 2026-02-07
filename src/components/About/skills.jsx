@@ -1,7 +1,7 @@
 import React from "react";
 import Marquee from "react-fast-marquee";
 
-function Skills({ skillsData, images }) {
+function Skills({ skillsData, title }) {
   return (
     <div className="skills-marquee-container">
       <Marquee
@@ -23,11 +23,11 @@ function Skills({ skillsData, images }) {
               </div>
               <div className="skills-marquee-card-content">
                 <div className="skills-marquee-card-icon">
-                  {/* Add the image or icon here based on the `images` prop */}
-                  {images[id] && <img src={images[id]} alt={skill} />}
+                  {/* Use the icon from the skill object */}
+                  {skill.icon && <img src={skill.icon} alt={skill.name || title} />}
                 </div>
                 <p className="skills-marquee-card-text">
-                  {skill}
+                  {skill.name || skill}
                 </p>
               </div>
             </div>

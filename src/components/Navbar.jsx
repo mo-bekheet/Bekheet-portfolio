@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import Container from "react-bootstrap/Container";
@@ -21,15 +21,23 @@ function NavBar() {
   const [expand, updateExpanded] = useState(false);
   const [navColour, updateNavbar] = useState(false);
 
-  function scrollHandler() {
-    if (window.scrollY >= 20) {
-      updateNavbar(true);
-    } else {
-      updateNavbar(false);
+  useEffect(() => {
+    function scrollHandler() {
+      if (window.scrollY >= 20) {
+        updateNavbar(true);
+      } else {
+        updateNavbar(false);
+      }
     }
-  }
 
-  window.addEventListener("scroll", scrollHandler);
+    // Add scroll event listener
+    window.addEventListener("scroll", scrollHandler);
+
+    // Clean up the event listener when component unmounts
+    return () => {
+      window.removeEventListener("scroll", scrollHandler);
+    };
+  }, []); // Empty dependency array means this effect runs once on mount and cleanup on unmount
 
   return (
     <Navbar
@@ -37,26 +45,28 @@ function NavBar() {
       fixed="top"
       expand="md"
       className={navColour ? "sticky" : "navbar"}
+      aria-label="Main navigation"
     >
       <Container>
         <Navbar.Brand href="/" className="d-flex">
-          <img src={logo} className="img-fluid logo" alt="brand" />
+          <img src={logo} className="img-fluid logo" alt="Mohamed Bekheet's portfolio logo" />
         </Navbar.Brand>
         <Navbar.Toggle
           aria-controls="responsive-navbar-nav"
           onClick={() => {
             updateExpanded(expand ? false : "expanded");
           }}
+          aria-label="Toggle navigation menu"
         >
-          <span></span>
-          <span></span>
-          <span></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
         </Navbar.Toggle>
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="ms-auto" defaultActiveKey="#home">
             <Nav.Item>
-              <Nav.Link as={Link} to="/" onClick={() => updateExpanded(false)}>
-                <AiOutlineHome style={{ marginBottom: "2px" }} /> Home
+              <Nav.Link as={Link} to="/" onClick={() => updateExpanded(false)} aria-label="Go to home page">
+                <AiOutlineHome style={{ marginBottom: "2px" }} aria-hidden="true" /> Home
               </Nav.Link>
             </Nav.Item>
 
@@ -65,8 +75,9 @@ function NavBar() {
                 as={Link}
                 to="/about"
                 onClick={() => updateExpanded(false)}
+                aria-label="Go to about page"
               >
-                <AiOutlineUser style={{ marginBottom: "2px" }} /> About
+                <AiOutlineUser style={{ marginBottom: "2px" }} aria-hidden="true" /> About
               </Nav.Link>
             </Nav.Item>
 
@@ -75,26 +86,29 @@ function NavBar() {
                 as={Link}
                 to="/project"
                 onClick={() => updateExpanded(false)}
+                aria-label="Go to projects page"
               >
                 <AiOutlineFundProjectionScreen
                   style={{ marginBottom: "2px" }}
+                  aria-hidden="true"
                 />{" "}
                 Projects
               </Nav.Link>
             </Nav.Item>
-            
+
             <Nav.Item>
               <Nav.Link
                 as={Link}
                 to="/certificate"
                 onClick={() => updateExpanded(false)}
+                aria-label="Go to certifications page"
               >
-                <ImBlog style={{ marginBottom: "2px" }} /> Certifications
+                <ImBlog style={{ marginBottom: "2px" }} aria-hidden="true" /> Certifications
               </Nav.Link>
             </Nav.Item>
             <Nav.Item>
-              <Nav.Link as={Link} to="/play" onClick={() => updateExpanded(false)}>
-                <GiGamepad style={{ marginBottom: "2px" }} /> Let's Play
+              <Nav.Link as={Link} to="/play" onClick={() => updateExpanded(false)} aria-label="Go to play page">
+                <GiGamepad style={{ marginBottom: "2px" }} aria-hidden="true" /> Let's Play
               </Nav.Link>
             </Nav.Item>
 
@@ -103,8 +117,9 @@ function NavBar() {
                 as={Link}
                 to="/resume"
                 onClick={() => updateExpanded(false)}
+                aria-label="Go to resume page"
               >
-                <CgFileDocument style={{ marginBottom: "2px" }} /> Resume
+                <CgFileDocument style={{ marginBottom: "2px" }} aria-hidden="true" /> Resume
               </Nav.Link>
             </Nav.Item>
 
@@ -113,9 +128,10 @@ function NavBar() {
                 href="https://github.com/mohamedbakhet/Bekheet.github.io"
                 target="_blank"
                 className="fork-btn-inner"
+                aria-label="View source code on GitHub"
               >
-                <CgGitFork style={{ fontSize: "1.2em" }} />{" "}
-                <AiFillStar style={{ fontSize: "1.1em" }} />
+                <CgGitFork style={{ fontSize: "1.2em" }} aria-hidden="true" />{" "}
+                <AiFillStar style={{ fontSize: "1.1em" }} aria-hidden="true" />
               </Button>
             </Nav.Item>
           </Nav>

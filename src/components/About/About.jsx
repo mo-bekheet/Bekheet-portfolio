@@ -3,14 +3,16 @@ import { Container, Row, Col } from "react-bootstrap";
 // import Particle from "../Particle";
 import Github from "./Github";
 import Aboutcard from "./AboutCard.jsx";
-import animationData from "../../assets/lotties/q2.json"; 
+import animationData from "../../assets/lotties/q2.json";
 import Lottie from "react-lottie-player";
 import Education from "./education.jsx";
 import ExperienceJourney from "./experience.jsx";
 import Skills from "./skills.jsx";
-import { programmingLanguages, programmingLanguageImages, frameworksAndLibraries, frameworksAndLibrariesImages, tools, toolImages } from "./skillsContent";
+import { skills } from '../../content/index.js';
 
 function About() {
+  const { programmingLanguages, frameworksAndLibraries, tools } = skills;
+  
   return (
     <Container fluid className="about-section">
       {/* <Particle /> */}
@@ -48,15 +50,15 @@ function About() {
         <h1 className="project-heading">
           <strong className="purple">Professional </strong>Skillset
         </h1>
-        <Skills skillsData={programmingLanguages} images={programmingLanguageImages} />
+        <Skills skillsData={programmingLanguages.items} title={programmingLanguages.title} />
         <h1 className="project-heading">
-          Frameworks & <strong className="purple">Libraries</strong>
+          {frameworksAndLibraries.title} & <strong className="purple">Libraries</strong>
         </h1>
-        <Skills skillsData={frameworksAndLibraries} images={frameworksAndLibrariesImages} />
+        <Skills skillsData={frameworksAndLibraries.items} title={frameworksAndLibraries.title} />
         <h1 className="project-heading">
           <strong className="purple">Tools</strong> I use
         </h1>
-        <Skills skillsData={tools} images={toolImages} />
+        <Skills skillsData={tools.items} title={tools.title} />
         <Github />
       </Container>
     </Container>

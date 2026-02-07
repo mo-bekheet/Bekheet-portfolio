@@ -4,19 +4,14 @@ import { viteStaticCopy } from 'vite-plugin-static-copy'
 
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), '');
+
   return {
     plugins: [
       react(),
       viteStaticCopy({
         targets: [
-          {
-            src: 'public/_redirects',
-            dest: ''
-          },
-          {
-            src: 'public/_headers',
-            dest: ''
-          }
+          { src: 'public/_redirects', dest: '' },
+          { src: 'public/_headers', dest: '' }
         ]
       })
     ],
@@ -26,9 +21,7 @@ export default defineConfig(({ mode }) => {
           target: env.VITE_AI_API_URL,
           changeOrigin: true,
           rewrite: (path) => path.replace(/^\/api/, ''),
-          headers: {
-            'Authorization': `Bearer ${env.VITE_AI_API_KEY}`
-          }
+          headers: { 'Authorization': `Bearer ${env.VITE_AI_API_KEY}` }
         }
       }
     },
@@ -48,6 +41,8 @@ export default defineConfig(({ mode }) => {
     },
     optimizeDeps: {
       include: ['react', 'react-dom', 'react-router-dom', 'three']
-    }
+    },
+    // Removed conflicting esbuild configuration
+    // The @vitejs/plugin-react handles JSX transformation properly
   }
 })

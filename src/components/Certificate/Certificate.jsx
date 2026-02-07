@@ -1,7 +1,7 @@
 import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import { Fade } from "react-awesome-reveal";
-import { certifications } from "./certificationData";
+import { certifications } from '../../content/index.js';
 
 export default function ProjectPage() {
   return (
@@ -12,7 +12,7 @@ export default function ProjectPage() {
             My Recent <strong className="purple">Certifications</strong>
           </h1>
           <p style={{ color: "white" }}>
-            Here are a few certifications I’ve recently earned.
+            Here are a few certifications I've recently earned.
           </p>
           <div>
             <Container fluid className="certificate-section" id="about">
@@ -25,7 +25,7 @@ export default function ProjectPage() {
                           <Fade bottom>
                             <div className="galaxy-glass-card">
                               <a
-                                href={cert.link}
+                                href={cert.credentialUrl}
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="certification-link"
@@ -34,7 +34,7 @@ export default function ProjectPage() {
                                   <div className="projectContent">
                                     <h5 className="cert-title">{cert.title}</h5>
                                     <img
-                                      src={cert.img}
+                                      src={cert.logo}
                                       alt={cert.alt}
                                       className="cert-image"
                                     />

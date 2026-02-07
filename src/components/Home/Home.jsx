@@ -12,16 +12,28 @@ import { AiOutlineGithub } from 'react-icons/ai';
 import { ImLinkedin } from 'react-icons/im';
 import { SiKaggle } from 'react-icons/si';
 import Tilt from "react-parallax-tilt";
+import { profile } from '../../content/index.js';
 import "./style.css";
 
 function Home() {
   const [sessionId, setSessionId] = useState('');
-
-
+  const { personalInfo, socialLinks } = profile;
 
   const processWithLangChain = async (message, sessionId) => {
     const response = `Processed message "${message}" for session: ${sessionId}`;
     return response;
+  };
+
+  // Map icon names to actual icon components
+  const getIconComponent = (iconName) => {
+    switch(iconName) {
+      case 'FaWhatsapp': return <FaWhatsapp />;
+      case 'AiOutlineGithub': return <AiOutlineGithub />;
+      case 'ImLinkedin': return <ImLinkedin />;
+      case 'SiKaggle': return <SiKaggle />;
+      case 'FaDev': return <FaDev />;
+      default: return null;
+    }
   };
 
   return (
@@ -32,7 +44,7 @@ function Home() {
           <Row>
             <Col md={7} className="home-header">
               <h1 style={{paddingBottom: 15}} className="heading">
-                Hi There!{" "}
+                {personalInfo.tagline}{" "}
                 <span className="wave" role="img" aria-labelledby="wave">
                   👋🏻
                 </span>
@@ -40,51 +52,28 @@ function Home() {
 
               <h1 className="heading-name">
                 I'M
-                <strong className="main-name"> Mohamed Bekheet</strong>
+                <strong className="main-name"> {personalInfo.name}</strong>
               </h1>
 
               <div style={{ padding: 50, textAlign: "left" }}>
                 <Type />
               </div>
-              
-              <div className="social-links-container">    
-                  <a href="https://chatwith.io/s/mohamed-bekheet" 
-                     target="_blank" 
-                     rel="noopener noreferrer"
-                     className="social-link"
-                     data-tooltip="Chat on WhatsApp">
-                        <FaWhatsapp />
-                  </a>    
-                  <a href="https://github.com/mohamedbakhet" 
-                     target="_blank" 
-                     rel="noopener noreferrer"
-                     className="social-link"
-                     data-tooltip="Follow on GitHub">
-                    <AiOutlineGithub />
+
+              <div className="social-links-container">
+                {socialLinks.map((link, index) => (
+                  <a 
+                    key={index}
+                    href={link.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="social-link"
+                    data-tooltip={link.tooltip}
+                  >
+                    {getIconComponent(link.icon)}
                   </a>
-                  <a href="https://www.linkedin.com/in/mohamedbekheet-/" 
-                     target="_blank" 
-                     rel="noopener noreferrer"
-                     className="social-link"
-                     data-tooltip="Connect on LinkedIn">
-                    <ImLinkedin />
-                  </a>
-                  <a href="https://www.kaggle.com/mohamedbakhet" 
-                     target="_blank" 
-                     rel="noopener noreferrer"
-                     className="social-link"
-                     data-tooltip="Follow on Kaggle">
-                    <SiKaggle />
-                  </a>
-                  <a href="https://dev.to/mohamed-bekheet" 
-                     target="_blank" 
-                     rel="noopener noreferrer"
-                     className="social-link"
-                     data-tooltip="Read on Dev.to">
-                    <FaDev />
-                  </a>
+                ))}
               </div>
- 
+
             </Col>
 
             <Col md={5} style={{ paddingBottom: 20 }}>
@@ -104,7 +93,7 @@ function Home() {
         </Container>
       </Container>
 
-    
+
     </section>
   );
 }
