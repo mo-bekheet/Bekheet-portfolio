@@ -113,6 +113,16 @@ const Testimonials = () => {
       profession: 'Machine Learning Engineer @ FORTE CLOUD | Machine Learning',
       delay: 1.1,
     },
+     {
+      id: 6,
+      imgSrc: '/Testimonial/img7.jpg',
+      link: 'https://www.linkedin.com/in/1mohamed-salah/',
+      quote:
+        "I had the pleasure of working with Bekheet during our computer science studies at Ain Shams University, in the Scientific Computing department. We collaborated on several projects, including our graduation project—analyzing ECG signals to detect severe heart diseases—and worked on algorithms, OOP, signal processing, and geometry. Bekheet is hardworking, innovative, and a great communicator. He takes initiative, confidently handles responsibility, and faces challenges with a positive, practical mindset. Reliable and driven, he’s someone you can truly count on.",
+      clientName: 'Mohamed Salah',
+      profession: 'Software Developer @ Giza Systems | . Net Developer',
+      delay: 1.1,
+    },
     
   ];
  

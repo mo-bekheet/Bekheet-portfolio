@@ -9,10 +9,10 @@ export default function ProjectPage() {
       <Container fluid className="project-section">
         <Container>
           <h1 className="project-heading">
-            My Recent <strong className="purple">Certifications</strong>
+            Professional <strong className="purple">Certifications</strong>
           </h1>
           <p style={{ color: "white" }}>
-            Here are a few certifications I’ve recently earned.
+            Industry-recognized credentials demonstrating my expertise.
           </p>
           <div>
             <Container fluid className="certificate-section" id="about">

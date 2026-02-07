@@ -1,34 +1,53 @@
-const isDevelopment = import.meta.env.DEV;
-const CHAT_API_URL = isDevelopment ? '/api/chat' : '/.netlify/functions/chat-proxy';
+import GeminiService from './GenAI';
+
+let geminiService = null;
 
 class ChatService {
+  static async initializeChat() {
+    if (!geminiService) {
+      try {
+        const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
+        if (!apiKey) {
+          throw new Error('Gemini API key not found in environment variables');
+        }
+        
+        geminiService = new GeminiService(apiKey);
+      } catch (error) {
+        console.error('Error initializing Gemini service:', error);
+        throw error;
+      }
+    }
+  }
+
   static async sendMessage(message) {
     try {
-      const response = await fetch(CHAT_API_URL, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ message }),
-      });
+      await this.initializeChat();
 
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-
-      const data = await response.json();
-      return data;
+      const responseText = await geminiService.sendMessage(message);
+      
+      return { message: responseText };
     } catch (error) {
-      console.error('Error sending message:', error);
+      console.error('Error sending message to Gemini:', error);
       throw error;
     }
   }
 
   static async getSystemStatus() {
     try {
-      const response = await fetch('/api/status');
-      return response.ok;
-    } catch {
+      // Check if API key is available
+      const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
+      if (!apiKey) {
+        console.warn('Gemini API key not found in environment variables');
+        return false;
+      }
+      
+      // Try to initialize the service as a basic connectivity test
+      const testService = new GeminiService(apiKey);
+      const responseText = await testService.sendMessage("Hello");
+      
+      return !!responseText;
+    } catch (error) {
+      console.error('Error checking Gemini system status:', error);
       return false;
     }
   }

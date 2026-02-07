@@ -43,11 +43,11 @@ function Home() {
                 <strong className="main-name"> Mohamed Bekheet</strong>
               </h1>
 
-              <div style={{ padding: 50, textAlign: "left" }}>
+              <div style={{ padding: "30px 50px", textAlign: "left" }}>
                 <Type />
               </div>
-              
-              <div className="social-links-container">    
+
+              <div className="social-links-container" style={{ marginTop: "40px" }}>
                   <a href="https://chatwith.io/s/mohamed-bekheet" 
                      target="_blank" 
                      rel="noopener noreferrer"
@@ -55,21 +55,21 @@ function Home() {
                      data-tooltip="Chat on WhatsApp">
                         <FaWhatsapp />
                   </a>    
-                  <a href="https://github.com/mohamedbakhet" 
+                  <a href="https://github.bekheet.com" 
                      target="_blank" 
                      rel="noopener noreferrer"
                      className="social-link"
                      data-tooltip="Follow on GitHub">
                     <AiOutlineGithub />
                   </a>
-                  <a href="https://www.linkedin.com/in/mohamedbekheet-/" 
+                  <a href="https://linkedin.bekheet.com/" 
                      target="_blank" 
                      rel="noopener noreferrer"
                      className="social-link"
                      data-tooltip="Connect on LinkedIn">
                     <ImLinkedin />
                   </a>
-                  <a href="https://www.kaggle.com/mohamedbakhet" 
+                  <a href="https://kaggle.bekheet.com" 
                      target="_blank" 
                      rel="noopener noreferrer"
                      className="social-link"

@@ -1,13 +1,14 @@
 // certificationData.js
-import gcp from "../../Assets/certifications/GCP.png";
-import azure from "../../Assets/certifications/dp100.svg";
-import awsml from "../../Assets/certifications/aws_ml.png";
-import aws from "../../Assets/certifications/aws.png";
-import gen from "../../Assets/certifications/gen.png";
-import ibm from "../../Assets/certifications/ibm.png";
-import DL from "../../Assets/certifications/DL.png";
-import awssa from "../../Assets/certifications/aws_sa.png";
-import hccdpai from "../../Assets/certifications/HCCDP-AI.jpeg";
+import gcp from "../../assets/certifications/GCP.png";
+import azure from "../../assets/certifications/dp100.png";
+import azureai from "../../assets/certifications/ai-102.png";
+import awsml from "../../assets/certifications/aws_ml.png";
+import aws from "../../assets/certifications/aws.png";
+import gen from "../../assets/certifications/gen.png";
+import ibm from "../../assets/certifications/ibm.png";
+import DL from "../../assets/certifications/DL.svg";
+import awssa from "../../assets/certifications/aws_sa.png";
+import hccdpai from "../../assets/certifications/HCCDP-AI.jpeg";
 
 export const certifications = [
   {
@@ -45,6 +46,16 @@ export const certifications = [
     link: "https://learn.microsoft.com/en-us/users/mohamedbekheetabdelallmohamed-6007/credentials/245fae1f406bb43c?ref=https%3A%2F%2Fwww.linkedin.com%2F",
     description:
       "Designing machine learning solutions starts with analyzing data and training models to address business needs. Next, models are optimized for deployment and integrated into production systems. Continuous monitoring and retraining ensure they remain effective over time.",
+  },
+  {
+    title: "Azure AI Engineer Associate",
+    img: azureai,
+    alt: "Azure AI Engineer Associate Certification",
+    link: "#",
+    description:
+      "Validates skills in analyzing requirements for AI solutions, designing AI infrastructure, implementing and managing AI solutions, and ensuring solution compliance and security. Demonstrates expertise in Azure Cognitive Services, Azure Bot Services, and Azure Machine Learning.",
+    issueDate: "2024",
+    credentialId: "AZ-102"
   },
   {
     title: "AWS Certified Machine Learning – Specialty",

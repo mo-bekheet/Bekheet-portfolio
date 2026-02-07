@@ -1,6 +1,6 @@
 import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
-import myImg from "../../Assets/avatar.png";
+import myImg from "../../assets/avatar.png";
 import Tilt from "react-parallax-tilt";
 
 function Home2() {
@@ -10,66 +10,34 @@ function Home2() {
         <Row>
           <Col md={8} className="home-about-description">
             <h1 style={{ fontSize: "2.6em" }}>
-              LET ME <span className="purple"> INTRODUCE </span> MYSELF
+              ABOUT <span className="purple"> ME </span>
             </h1>
             <p className="home-about-body">
-              🚀 I am a passionate{" "}
-              <b className="purple">Machine Learning Engineer</b> with a deep
-              love for
-              <b className="purple">
-                {" "}
-                AI, MLOps, Data Science, Computer Vision,
-              </b>{" "}
-              and <b className="purple">Generative AI</b>.
+              I'm Mohamed Bekheet, a <b className="purple">Machine Learning Engineer</b> specializing in designing and deploying production-grade AI systems that solve real business problems.
               <br />
               <br />
-              💻 Proficient in
-              <i>
-                <b className="purple"> Python, C++, Java, JavaScript,</b> and{" "}
-                <b className="purple">R</b>.
-              </i>
+              My work focuses on applied AI across <b className="purple">Computer Vision, Generative AI, MLOps, and Data Science</b>, where I build scalable solutions that transform complex workflows into automated, intelligent processes.
               <br />
               <br />
-              🤖 I specialize in
-              <i>
-                <b className="purple">
-                  Computer Vision, Optical Character Recognition (OCR),
-                  Generative AI, Retrieval-Augmented Generation (RAG) systems,
-                </b>{" "}
-                and <b className="purple">AI Agents</b>.
-              </i>
+              I'm proficient in <b className="purple">Python</b> as my primary development language, with additional experience in 
+              <i><b className="purple"> C++, Java, JavaScript, and R</b></i>, enabling me to design end-to-end systems from data pipelines to model deployment.
               <br />
               <br />
-              ☁️ My expertise includes
-              <b className="purple"> cloud architecture</b> and building
-              <i>
-                <b className="purple"> scalable ML solutions</b>.
-              </i>
+              My core expertise includes <b className="purple">Computer Vision, Optical Character Recognition (OCR), Generative AI, Retrieval-Augmented Generation (RAG), and AI Agents</b>—allowing me to deliver advanced AI applications for real-world environments.
               <br />
               <br />
-              🛠️ I have hands-on experience deploying models using
-              <b className="purple"> AWS services</b> like
-              <i>
-                <b className="purple"> SageMaker</b> and{" "}
-                <b className="purple">Bedrock</b>,
-              </i>{" "}
-              alongside other cloud platforms,
-              <b className="purple"> on-premise infrastructure</b>, and{" "}
-              <b className="purple">edge devices</b>.
+              I have hands-on experience architecting scalable ML solutions on <b className="purple">AWS</b>, including 
+              <i><b className="purple"> SageMaker and Bedrock</b></i>, as well as deploying models across cloud, on-premise, and edge environments to meet performance, latency, and reliability requirements.
               <br />
               <br />
-              🔍 I am always eager to explore
-              <b className="purple"> new technologies</b> and continuously
-              <i>
-                <b className="purple"> optimize systems</b> for
-                <b className="purple"> peak performance</b>.
-              </i>
+              Driven by continuous learning, I actively explore <b className="purple">emerging AI technologies</b> and 
+              <i><b className="purple">optimize systems</b> for efficiency, scalability, and long-term maintainability</i>.
             </p>
           </Col>
 
           <Col md={4} className="myAvtar">
             <Tilt>
-              <img src={myImg} className="img-fluid" alt="avatar" />
+              <img src={myImg} className="img-fluid" alt="Mohamed Bekheet - Machine Learning Engineer" />
             </Tilt>
           </Col>
         </Row>

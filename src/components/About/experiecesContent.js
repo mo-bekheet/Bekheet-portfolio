@@ -1,10 +1,11 @@
 const experiences = [
+
   {
     title: "Machine Learning Engineer",
-    company_name: "Forte Cloud",
+    company_name: "FORTE CLOUD",
     icon: "./company/forte.png",
     iconBg: "#c95bf5",
-    date: "Jul 2023 - Present",
+    date: "Jul 2023 - july 2025",
     link: "",
     points: [
       "Developed and deployed machine learning models for computer vision, speech recognition, and natural language processing (NLP), utilizing LLM techniques to solve complex business challenges.",
