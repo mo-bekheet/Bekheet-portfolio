@@ -10,7 +10,7 @@ import DL from "../../assets/certifications/DL.svg";
 import awssa from "../../assets/certifications/aws_sa.png";
 import hccdpai from "../../assets/certifications/HCCDP-AI.jpeg";
 import genpa from "../../assets/certifications/genpa.png";
-import awsda from "../../assets/certifications/awsda.jpg";
+import awsda from "../../assets/certifications/awsda.png";
 export const certifications = [
   {
     title: "AWS Certified Generative AI Developer - Professional",
