@@ -12,6 +12,26 @@ import hccdpai from "../../assets/certifications/HCCDP-AI.jpeg";
 
 export const certifications = [
   {
+    title: "AWS Certified Generative AI Developer - Professional",
+    img: gen,
+    alt: "AWS Certified Generative AI Developer - Professional Certification",
+    link: "#",
+    description:
+      "Demonstrates advanced expertise in building and deploying generative AI solutions on AWS, including foundation models and scalable architectures.",
+    issueDate: "Mar 2026",
+    expiryDate: "Mar 2029"
+  },
+  {
+    title: "AWS Certified Data Engineer - Associate",
+    img: aws,
+    alt: "AWS Certified Data Engineer Associate Certification",
+    link: "#",
+    description:
+      "Validates skills in designing, building, and maintaining data pipelines and data solutions on AWS.",
+    issueDate: "Feb 2026",
+    expiryDate: "Feb 2029"
+  }
+  {
     title: "AWS Solution Architect Associate",
     img: awssa,
     alt: "AWS Solutions Architect Associate Certification",
@@ -53,9 +73,10 @@ export const certifications = [
     alt: "Azure AI Engineer Associate Certification",
     link: "#",
     description:
-      "Validates skills in analyzing requirements for AI solutions, designing AI infrastructure, implementing and managing AI solutions, and ensuring solution compliance and security. Demonstrates expertise in Azure Cognitive Services, Azure Bot Services, and Azure Machine Learning.",
-    issueDate: "2024",
-    credentialId: "AZ-102"
+      "Validates skills in analyzing requirements for AI solutions, designing AI infrastructure, implementing and managing AI solutions.",
+    issueDate: "May 2025",
+    expiryDate: "May 2026",
+    credentialId: "FA6071FDFCAAF84"
   },
   {
     title: "AWS Certified Machine Learning – Specialty",
