@@ -9,11 +9,12 @@ import ibm from "../../assets/certifications/ibm.png";
 import DL from "../../assets/certifications/DL.svg";
 import awssa from "../../assets/certifications/aws_sa.png";
 import hccdpai from "../../assets/certifications/HCCDP-AI.jpeg";
-
+import genpa from "../../assets/certifications/genpa.png";
+import awsda from "../../assets/certifications/awsda.jpg";
 export const certifications = [
   {
     title: "AWS Certified Generative AI Developer - Professional",
-    img: gen,
+    img: genpa,
     alt: "AWS Certified Generative AI Developer - Professional Certification",
     link: "#",
     description:
@@ -23,14 +24,14 @@ export const certifications = [
   },
   {
     title: "AWS Certified Data Engineer - Associate",
-    img: aws,
+    img: awsda,
     alt: "AWS Certified Data Engineer Associate Certification",
     link: "#",
     description:
       "Validates skills in designing, building, and maintaining data pipelines and data solutions on AWS.",
     issueDate: "Feb 2026",
     expiryDate: "Feb 2029"
-  }
+  },
   {
     title: "AWS Solution Architect Associate",
     img: awssa,
