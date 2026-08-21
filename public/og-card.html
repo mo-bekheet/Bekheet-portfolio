@@ -1,0 +1,46 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+  * { margin: 0; box-sizing: border-box; }
+  body {
+    width: 1200px; height: 630px;
+    font-family: -apple-system, 'Segoe UI', Roboto, sans-serif;
+    background: linear-gradient(135deg, #0d0b1e 0%, #1d1836 55%, #2a1b4e 100%);
+    color: #fff;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 70px 80px;
+    position: relative; overflow: hidden;
+  }
+  .glow { position: absolute; border-radius: 50%; filter: blur(90px); opacity: .45; }
+  .g1 { width: 420px; height: 420px; background: #c770f0; top: -140px; right: -100px; }
+  .g2 { width: 360px; height: 360px; background: #5b2bd9; bottom: -160px; left: -120px; }
+  .left { max-width: 720px; z-index: 1; }
+  .kicker { color: #c770f0; letter-spacing: 4px; font-size: 22px; text-transform: uppercase; margin-bottom: 24px; font-weight: 600; }
+  h1 { font-size: 76px; line-height: 1.05; margin-bottom: 20px; }
+  h1 span { color: #c770f0; }
+  .roles { font-size: 30px; color: #d8d3ee; margin-bottom: 36px; }
+  .badges { display: flex; gap: 12px; flex-wrap: wrap; }
+  .badge {
+    border: 1.5px solid rgba(199,112,240,.65); color: #e9d9fb;
+    padding: 8px 18px; border-radius: 999px; font-size: 19px; background: rgba(199,112,240,.12);
+  }
+  .url { position: absolute; bottom: 44px; left: 80px; font-size: 24px; color: #9b8fc4; letter-spacing: 1px; }
+</style>
+</head>
+<body>
+  <div class="glow g1"></div><div class="glow g2"></div>
+  <div class="left">
+    <div class="kicker">Portfolio · bekheet.com</div>
+    <h1>Mohamed<br><span>Bekheet</span></h1>
+    <div class="roles">AI Delivery Engineer · Agentic AI on AWS Bedrock &amp; MCP</div>
+    <div class="badges">
+      <span class="badge">13× Certified</span>
+      <span class="badge">AWS · Azure · GCP</span>
+      <span class="badge">Generative AI</span>
+      <span class="badge">Computer Vision</span>
+    </div>
+  </div>
+</body>
+</html>
