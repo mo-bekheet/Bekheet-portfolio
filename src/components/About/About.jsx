@@ -24,9 +24,9 @@ function About() {
               paddingBottom: "50px",
             }}
           >
-            <h1 style={{ fontSize: "2.1em", paddingBottom: "20px" }}>
+            <h2 style={{ fontSize: "2.1em", paddingBottom: "20px" }}>
               About <strong className="purple">Me</strong>
-            </h1>
+            </h2>
             <Aboutcard />
           </Col>
           <Col
@@ -45,17 +45,17 @@ function About() {
         <ExperienceJourney />
         <Education />
 
-        <h1 className="project-heading">
+        <h2 className="project-heading">
           <strong className="purple">Technical </strong>Skills
-        </h1>
+        </h2>
         <Skills skillsData={programmingLanguages} images={programmingLanguageImages} />
-        <h1 className="project-heading">
+        <h2 className="project-heading">
           <strong className="purple">Frameworks</strong> & Libraries
-        </h1>
+        </h2>
         <Skills skillsData={frameworksAndLibraries} images={frameworksAndLibrariesImages} />
-        <h1 className="project-heading">
+        <h2 className="project-heading">
           <strong className="purple">Developer Tools</strong> & Technologies
-        </h1>
+        </h2>
         <Skills skillsData={tools} images={toolImages} />
         <Github />
       </Container>

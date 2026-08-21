@@ -8,9 +8,9 @@ export default function ProjectPage() {
     <section>
       <Container fluid className="project-section">
         <Container>
-          <h1 className="project-heading">
+          <h2 className="project-heading">
             Professional <strong className="purple">Certifications</strong>
-          </h1>
+          </h2>
           <p style={{ color: "white" }}>
             Industry-recognized credentials demonstrating my expertise.
           </p>

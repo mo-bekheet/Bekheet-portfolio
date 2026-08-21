@@ -18,9 +18,9 @@ function ResumeNew() {
       <Container fluid className="resume-section">
         <Particle />
         <Row style={{ justifyContent: "center", position: "relative", marginBottom: "30px" }}>
-          <h1 className="project-heading">
+          <h2 className="project-heading">
             My <strong className="purple">Resume</strong>
-          </h1>
+          </h2>
         </Row>
         
         <Row style={{ justifyContent: "center", position: "relative", marginBottom: "30px" }}>

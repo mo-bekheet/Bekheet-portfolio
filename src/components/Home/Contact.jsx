@@ -93,7 +93,7 @@ const Contact = () => {
 
             >
         <p className="section-sub-text">Get in touch</p>
-        <h3 className="section-head-text">Contact.</h3>
+        <h2 className="section-head-text">Contact.</h2>
 
         <form
           ref={formRef}
@@ -101,35 +101,41 @@ const Contact = () => {
           className="form"
         >
         <label className="form-label">
+          <span className="sr-only">Your Name</span>
           <input
               type="text"
               name="name"
               value={form.name}
               onChange={handleChange}
               placeholder="Your Name"
+              aria-label="Your Name"
               className="nameinput"
             />
-          </label>
-          <label className="form-label">
-            <input
-              type="email"
-              name="email"
-              value={form.email}
-              onChange={handleChange}
-              placeholder="Your email"
-              className="nameinput"
-            />
-          </label>
-          <label className="form-label">
-            <textarea
-              rows={7}
-              name="message"
-              value={form.message}
-              onChange={handleChange}
-              placeholder="Message"
-              className="nameinput"
-            />
-          </label>
+        </label>
+        <label className="form-label">
+          <span className="sr-only">Your Email</span>
+          <input
+            type="email"
+            name="email"
+            value={form.email}
+            onChange={handleChange}
+            placeholder="Your email"
+            aria-label="Your email"
+            className="nameinput"
+          />
+        </label>
+        <label className="form-label">
+          <span className="sr-only">Message</span>
+          <textarea
+            rows={7}
+            name="message"
+            value={form.message}
+            onChange={handleChange}
+            placeholder="Message"
+            aria-label="Your message"
+            className="nameinput"
+          />
+        </label>
 
           <button type="submit" className="submit-button">
             {loading ? (

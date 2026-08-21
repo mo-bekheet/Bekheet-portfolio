@@ -9,9 +9,9 @@ function Home2() {
       <Container>
         <Row>
           <Col md={8} className="home-about-description">
-            <h1 style={{ fontSize: "2.6em" }}>
+            <h2 style={{ fontSize: "2.6em" }}>
               ABOUT <span className="purple"> ME </span>
-            </h1>
+            </h2>
             <p className="home-about-body">
               I'm Mohamed Bekheet, a <b className="purple">Machine Learning Engineer</b> specializing in designing and deploying production-grade AI systems that solve real business problems.
               <br />

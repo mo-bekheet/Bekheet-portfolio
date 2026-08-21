@@ -31,12 +31,12 @@ function Home() {
         <Container className="home-content">
           <Row>
             <Col md={7} className="home-header">
-              <h1 style={{paddingBottom: 15}} className="heading">
+              <p style={{paddingBottom: 15}} className="heading">
                 Hi There!{" "}
                 <span className="wave" role="img" aria-labelledby="wave">
                   👋🏻
                 </span>
-              </h1>
+              </p>
 
               <h1 className="heading-name">
                 I'M
@@ -52,35 +52,35 @@ function Home() {
                      target="_blank" 
                      rel="noopener noreferrer"
                      className="social-link"
-                     data-tooltip="Chat on WhatsApp">
+                     data-tooltip="Chat on WhatsApp" aria-label="Chat on WhatsApp">
                         <FaWhatsapp />
                   </a>    
                   <a href="https://github.bekheet.com" 
                      target="_blank" 
                      rel="noopener noreferrer"
                      className="social-link"
-                     data-tooltip="Follow on GitHub">
+                     data-tooltip="Follow on GitHub" aria-label="Follow on GitHub">
                     <AiOutlineGithub />
                   </a>
                   <a href="https://linkedin.bekheet.com/" 
                      target="_blank" 
                      rel="noopener noreferrer"
                      className="social-link"
-                     data-tooltip="Connect on LinkedIn">
+                     data-tooltip="Connect on LinkedIn" aria-label="Connect on LinkedIn">
                     <ImLinkedin />
                   </a>
                   <a href="https://kaggle.bekheet.com" 
                      target="_blank" 
                      rel="noopener noreferrer"
                      className="social-link"
-                     data-tooltip="Follow on Kaggle">
+                     data-tooltip="Follow on Kaggle" aria-label="Follow on Kaggle">
                     <SiKaggle />
                   </a>
                   <a href="https://dev.to/mohamed-bekheet" 
                      target="_blank" 
                      rel="noopener noreferrer"
                      className="social-link"
-                     data-tooltip="Read on Dev.to">
+                     data-tooltip="Read on Dev.to" aria-label="Read my articles on Dev.to">
                     <FaDev />
                   </a>
               </div>

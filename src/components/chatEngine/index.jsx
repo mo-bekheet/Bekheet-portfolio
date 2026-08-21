@@ -125,6 +125,8 @@ const Chatbot = () => {
         onClick={() => setIsOpen(!isOpen)}
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
+        aria-label={isOpen ? "Close AI assistant chat" : "Open AI assistant chat"}
+        aria-expanded={isOpen}
       >
         <AgentAvatar size="medium" agentType="general" isOnline={true} />
       </motion.button>
