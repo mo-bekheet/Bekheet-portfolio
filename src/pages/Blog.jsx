@@ -3,34 +3,42 @@ import { Container, Row, Col, Card } from 'react-bootstrap';
 import { motion } from 'framer-motion';
 import ReactMarkdown from 'react-markdown';
 import './Blog.css';
+import { samplePosts } from '../content/index.js';
+import { postsApi } from '../lib/api';
 
-const samplePosts = [
-  {
-    id: 1,
-    title: 'Modernizing React Portfolio with Vite and Custom AI',
-    date: 'April 2026',
-    category: 'Architecture',
-    content: 'Building a modern web presence is no longer just about standard templates. By combining **React**, **Vite**, and **Zustand** state management along with an embedded AI Assistant via **Google Gemini**, you can turn a static brochure into an interactive experience. \n\n### Why Vite?\nVite provides instantaneous hot module replacement (HMR), making development incredibly fast...',
-    readTime: '3 min read'
-  },
-  {
-    id: 2,
-    title: 'Optimizing Computer Vision at the Edge',
-    date: 'March 2026',
-    category: 'Machine Learning',
-    content: 'Deploying deep learning models to the edge comes with severe resource limitations. During my work, we extensively used OpenVINO and optimized ONNX models to achieve real-time text recognition on embedded devices running minimal Linux distributions.',
-    readTime: '5 min read'
-  }
-];
+const formatDate = (value) =>
+  new Date(value).toLocaleDateString('en-US', { year: 'numeric', month: 'long' });
 
 const Blog = () => {
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
-    // Mimic fetching from CMS or Firebase
-    setTimeout(() => {
-      setPosts(samplePosts);
-    }, 400);
+    let mounted = true;
+    postsApi
+      .listPublished()
+      .then((rows) => {
+        if (!mounted) return;
+        if (rows?.length) {
+          setPosts(
+            rows.map((row) => ({
+              id: row.id,
+              title: row.title,
+              category: row.category,
+              date: row.date_label || formatDate(row.created_at),
+              content: row.content || '',
+              readTime: row.read_time || ''
+            }))
+          );
+        } else {
+          setPosts(samplePosts);
+        }
+      })
+      .catch(() => {
+        if (mounted) setPosts(samplePosts);
+      });
+    return () => {
+      mounted = false;
+    };
   }, []);
 
   return (
