@@ -22,3 +22,11 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# env & secrets
+.env
+
+# test/browser artifacts
+.playwright-cli/
+test-results/
+playwright-report/
