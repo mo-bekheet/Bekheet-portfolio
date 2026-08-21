@@ -10,9 +10,9 @@ function Projects() {
     <Container fluid className="project-section">
       {/* <Particle /> */}
       <Container>
-        <h1 className="project-heading">
+        <h2 className="project-heading">
           Featured <strong className="purple">Projects </strong>
-        </h1>
+        </h2>
         <p style={{ color: "white" }}>
           Here are selected projects showcasing my expertise and experience.
         </p>
