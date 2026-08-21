@@ -1,0 +1,74 @@
+/* Theme Definitions for Bekheet Portfolio */
+
+/* Dark Space Theme (Default) */
+:root {
+  --color-bg-base: hsl(240, 20%, 8%);
+  --color-bg-surface: hsl(240, 20%, 12%);
+  --color-bg-glass: hsla(240, 20%, 15%, 0.6);
+  --color-bg-glass-border: hsla(240, 30%, 30%, 0.2);
+  
+  --color-primary: hsl(270, 70%, 60%);
+  --color-primary-hover: hsl(270, 70%, 50%);
+  --color-primary-glow: hsla(270, 70%, 60%, 0.4);
+  
+  --color-accent: hsl(190, 80%, 50%);
+  --color-accent-glow: hsla(190, 80%, 50%, 0.4);
+  
+  --color-text-primary: hsl(0, 0%, 100%);
+  --color-text-secondary: hsl(240, 10%, 70%);
+  --color-text-muted: hsl(240, 10%, 50%);
+  
+  --font-family-base: 'Outfit', 'Inter', system-ui, -apple-system, sans-serif;
+  --font-family-heading: 'Outfit', 'Inter', system-ui, -apple-system, sans-serif;
+  
+  --shadow-glow: 0 0 20px var(--color-primary-glow);
+  --shadow-glass: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-full: 9999px;
+  
+  --transition-fast: 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-normal: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Light Theme Variables */
+[data-theme='light'] {
+  --color-bg-base: hsl(0, 0%, 98%);
+  --color-bg-surface: hsl(0, 0%, 100%);
+  --color-bg-glass: hsla(0, 0%, 100%, 0.7);
+  --color-bg-glass-border: hsla(240, 10%, 80%, 0.5);
+  
+  --color-primary: hsl(270, 60%, 45%);
+  --color-primary-hover: hsl(270, 60%, 35%);
+  --color-primary-glow: hsla(270, 60%, 50%, 0.2);
+  
+  --color-accent: hsl(190, 70%, 40%);
+  --color-accent-glow: hsla(190, 70%, 40%, 0.2);
+  
+  --color-text-primary: hsl(240, 30%, 10%);
+  --color-text-secondary: hsl(240, 10%, 30%);
+  --color-text-muted: hsl(240, 10%, 50%);
+  
+  --shadow-glow: 0 0 20px var(--color-primary-glow);
+  --shadow-glass: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
+}
+
+/* Glassmorphism Utilities */
+.glass-panel {
+  background: var(--color-bg-glass);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--color-bg-glass-border);
+  box-shadow: var(--shadow-glass);
+  border-radius: var(--radius-md);
+}
+
+.text-gradient {
+  background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}

@@ -1,17 +1,19 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, lazy, Suspense } from 'react';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import './App.css';
 import Preloader from "./components/Pre.jsx";
 import Navbar from "./components/Navbar.jsx";
 import ScrollToTop from "./components/ScrollToTop.jsx";
-import Certificate from "./components/Certificate/Certificate.jsx";
-import ResumeNew from "./components/Resume/ResumeNew.jsx";
-import Home from "./components/Home/Home.jsx";
-import About from "./components/About/About.jsx";
-import Projects from "./components/Projects/Projects.jsx";
 import Footer from "./components/Footer.jsx";
 import Chatbot from "./components/chatEngine/index.jsx";
 import Particle from "./components/Particle.jsx";
+
+const Home = lazy(() => import("./components/Home/Home.jsx"));
+const About = lazy(() => import("./components/About/About.jsx"));
+const Projects = lazy(() => import("./components/Projects/Projects.jsx"));
+const Certificate = lazy(() => import("./components/Certificate/Certificate.jsx"));
+const ResumeNew = lazy(() => import("./components/Resume/ResumeNew.jsx"));
+const Blog = lazy(() => import("./pages/Blog.jsx"));
 
 function App() {
   const [load, updateLoad] = useState(true);
@@ -31,14 +33,17 @@ function App() {
         <Navbar />
         <ScrollToTop />
         <Particle />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/resume" element={<ResumeNew />} />
-          <Route path="/certificate" element={<Certificate />} />
-          <Route path="/project" element={<Projects />} />
-          <Route path="/about" element={<About />} />
-          <Route path="*" element={<Navigate to="/" />} />
-        </Routes>
+        <Suspense fallback={<div style={{ minHeight: "60vh" }} aria-hidden="true" />}>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/resume" element={<ResumeNew />} />
+            <Route path="/certificate" element={<Certificate />} />
+            <Route path="/project" element={<Projects />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/blog" element={<Blog />} />
+            <Route path="*" element={<Navigate to="/" />} />
+          </Routes>
+        </Suspense>
       </div>
       <Chatbot />
       <Footer />

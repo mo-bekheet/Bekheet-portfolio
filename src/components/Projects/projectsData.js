@@ -15,77 +15,90 @@ export const projectData = [
     isBlog: false,
     title: "CopticTrans",
     description:
-      "(graduation project of my master), Sponsor: Microsoft. CopticTrans is a Translation application build base on AI for translating the Coptic language with an OCR feature to extract the Coptic text from images before translation.",
+      "Master's graduation project, sponsored by Microsoft. Built an end-to-end AI translation app for the Coptic language: a custom OCR pipeline extracts ancient Coptic text from manuscript photos, then a neural translation model converts it — making a 2,000-year-old language accessible from a phone camera.",
     ghLink: "https://github.com/mohamedbakhet/CopticTrans",
+    type: "original",
   },
   {
     imgPath: ocr,
     isBlog: false,
     title: "CardioAI",
     description:
-      "Graduation project, Analysis ECG signal to diagnose severe heart disease. Build a Deep learning model that uses ECG signals to diagnose between 14 heart diseases, then use the second model to detect the location of myocardial infarction if found.",
+      "BSc graduation project. Deep learning system that reads raw ECG signals and classifies 14 severe heart conditions, with a second-stage model localizing myocardial infarctions. Trained and validated on public ECG datasets; my first end-to-end medical AI pipeline.",
     ghLink:
       "https://github.com/mohamedbakhet/Analysis-ECG-signal-for-diagnosis-severe-heart-diseases.git",
-  },
-  {
-    imgPath: emr,
-    isBlog: false,
-    title: "DataLake with AWS EMR",
-    description:
-      "A music streaming startup, Sparkify, wants to move their data warehouse to a data lake. Their data, stored in S3 as JSON logs of user activity and song metadata, needs to be processed. As their data engineer, your task is to build an ETL pipeline using Spark to extract, process, and load the data back into S3 as dimensional tables, enabling the analytics team to gain insights into user listening habits.",
-    ghLink: "https://github.com/mohamedbakhet/DataLake-with-AWS-EMR-",
-  },
-  {
-    imgPath: redshift,
-    isBlog: false,
-    title: "Data Warehouse With AWS Redshift",
-    description:
-      "Sparkify, a music streaming startup, aims to move their data processes to the cloud. Their data, stored in S3 as JSON logs and song metadata, will be processed using an ETL pipeline. This pipeline will load the data into Redshift, where it will be transformed into analytics tables, enabling deeper insights into user activity.",
-    ghLink:
-      "https://github.com/mohamedbakhet/Data-Warehouse-With-AWS-Redshift/tree/main",
-  },
-  {
-    imgPath: postg,
-    isBlog: false,
-    title: "Data Modeling with Postgres Sparkify",
-    description:
-      "Sparkify, a new music streaming app, seeks to analyze their collected data on songs and user activity. The analytics team is focused on understanding user listening patterns and performing other analyses. To achieve this, the project involves using PostgreSQL, Python, and SQL to create a Postgres database with well-structured tables. An ETL pipeline will be built to efficiently extract, transform, and load data, while a star schema with fact and dimension tables will be designed to optimize queries for song play analysis.",
-    ghLink:
-      "https://github.com/mohamedbakhet/Data-Modeling-with-Postgres-Sparkify-",
-  },
-  {
-    imgPath: cassandra,
-    isBlog: false,
-    title: "Data Modeling with Apache Cassandra",
-    description:
-      "Sparkify, a startup, aims to analyze user activity and song listening habits on their new music streaming app. Currently, their data is stored in a directory of CSV files, making it challenging to generate insights. They have enlisted a data engineer to create an Apache Cassandra database to facilitate querying and analysis of song play data. Your role in the project is to design and implement this database, allowing the analysis team to run specific queries and extract valuable insights from the user activity data.",
-    ghLink:
-      "https://github.com/mohamedbakhet/Data-Modeling-with-Apache-Cassandra",
+    type: "original",
   },
   {
     imgPath: cgen,
     isBlog: false,
     title: "CGAN for Fake Task Detection",
     description:
-      "This project repository focuses on utilizing Conditional Generative Adversarial Networks (CGANs) to both generate and detect fake tasks within Mobile Crowdsensing Systems (MCS). The project aims to advance the field by developing sophisticated techniques for synthetic task generation and detection. It combines traditional machine learning models, like Random Forest and AdaBoost, with innovative GAN technology to create and identify fake tasks.",
+      "Research project combining Conditional GANs with classical ML (Random Forest, AdaBoost) for Mobile Crowdsensing systems: the CGAN synthesizes realistic fake tasks used to train detectors that flag fraudulent submissions in crowdsourced platforms.",
     ghLink:
       "https://github.com/mohamedbakhet/CGAN-for-Fake-Task-Detection-in-Mobile-Crowdsensing-Systems-MCS-",
-  },
-  {
-    imgPath: amazon,
-    isBlog: false,
-    title: "Amazon book reviews",
-    description:
-      "This project provides a comprehensive project for collecting, analyzing, and visualizing Amazon book reviews. It includes tools and Jupyter notebooks for generating a dataset from Amazon reviews and performing various types of analysis. This project aims to uncover insights into customer sentiments and trends in book reviews on Amazon.",
-    ghLink: "https://github.com/mohamedbakhet/Amazon-book-reviews",
+    type: "original",
   },
   {
     imgPath: sentiment,
     isBlog: false,
-    title: "Sentiment Analysis in Arabic tweets",
+    title: "Arabic Sentiment Analysis",
     description:
-      "This project aims to classify Arabic tweets as positive, negative, or neutral using Natural Language Processing (NLP) and transfer learning. It focuses on handling the unique challenges of Arabic language processing, such as dialects and informal text. By leveraging pre-trained models, the project enhances accuracy in sentiment detection, providing valuable insights into public sentiment in the Arabic-speaking world.",
+      "NLP pipeline classifying Arabic tweets as positive/negative/neutral using transfer learning. Tackles what makes Arabic hard: dialect variation and informal text. Fine-tuned pre-trained transformers against classical baselines to measure the gap.",
     ghLink:
       "https://github.com/mohamedbakhet/Sentiment-Analysis-in-Arabic-tweets",
+    type: "original",
+  },
+  {
+    imgPath: amazon,
+    isBlog: false,
+    title: "Amazon Book Reviews Analytics",
+    description:
+      "Data product covering the full lifecycle of Amazon book-review data: dataset construction, sentiment and trend analysis, and interactive visualizations surfacing what drives customer opinion across genres.",
+    ghLink: "https://github.com/mohamedbakhet/Amazon-book-reviews",
+    type: "original",
+  },
+  {
+    imgPath: emr,
+    isBlog: false,
+    title: "Data Lake on AWS EMR",
+    description:
+      "ETL pipeline on AWS EMR + Spark: ingested JSON user-activity and catalog data from S3, processed it into Parquet dimensional tables, and wrote partitioned output back to S3 for analytics. Focus areas: Spark job optimization, schema-on-read, cost-aware cluster sizing.",
+    ghLink: "https://github.com/mohamedbakhet/DataLake-with-AWS-EMR-",
+    type: "coursework",
+    course: "Udacity Data Engineering Nanodegree",
+  },
+  {
+    imgPath: redshift,
+    isBlog: false,
+    title: "Cloud Data Warehouse on Redshift",
+    description:
+      "Moved a music-streaming analytics workload to AWS Redshift: built idempotent ETL in Python that stages S3 JSON logs and song metadata into a star schema (fact songplays + dimensions), tuned distribution/distkeys for the heaviest analyst queries.",
+    ghLink:
+      "https://github.com/mohamedbakhet/Data-Warehouse-With-AWS-Redshift/tree/main",
+    type: "coursework",
+    course: "Udacity Data Engineering Nanodegree",
+  },
+  {
+    imgPath: postg,
+    isBlog: false,
+    title: "Data Modeling with Postgres",
+    description:
+      "Designed a Postgres star schema for song-play analytics and the Python ETL that populates it from JSON logs: fact/dimension modeling, upsert handling, and query optimization for the analytics team's listening-pattern questions.",
+    ghLink:
+      "https://github.com/mohamedbakhet/Data-Modeling-with-Postgres-Sparkify-",
+    type: "coursework",
+    course: "Udacity Data Engineering Nanodegree",
+  },
+  {
+    imgPath: cassandra,
+    isBlog: false,
+    title: "Data Modeling with Apache Cassandra",
+    description:
+      "Modeled Cassandra tables for high-volume song-play events, applying query-first design: one denormalized table per access pattern (session history, user playlists), with composite partition/clustering keys chosen from actual query shapes.",
+    ghLink:
+      "https://github.com/mohamedbakhet/Data-Modeling-with-Apache-Cassandra",
+    type: "coursework",
+    course: "Udacity Data Engineering Nanodegree",
   },
 ];

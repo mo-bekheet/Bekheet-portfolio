@@ -13,6 +13,15 @@ import genpa from "../../assets/certifications/genpa.png";
 import awsda from "../../assets/certifications/awsda.png";
 export const certifications = [
   {
+    title: "Claude Certified Architect - Foundations",
+    img: gen,
+    alt: "Anthropic Claude Certified Architect - Foundations Certification",
+    link: "#",
+    description:
+      "Anthropic certification covering agentic architecture, Model Context Protocol (MCP) integration, prompt engineering, and structured output reliability for production Claude applications.",
+    issueDate: "Jun 2026"
+  },
+  {
     title: "AWS Certified Generative AI Developer - Professional",
     img: genpa,
     alt: "AWS Certified Generative AI Developer - Professional Certification",
