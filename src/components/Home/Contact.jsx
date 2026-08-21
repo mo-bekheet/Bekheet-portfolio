@@ -1,12 +1,13 @@
-import React, { useRef, useState } from "react";
+import React, { Suspense, lazy, useMemo, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import emailjs from "@emailjs/browser";
-import { EarthCanvas } from "./canvas";
 import { SectionWrapper } from "../hoc";
 import { slideIn } from "../utils/motion";
 import { Container, Row, Col } from "react-bootstrap";
 import "./style.css";
 import '@fortawesome/fontawesome-free/css/all.min.css'; // Import Font Awesome CSS
+
+const EarthCanvas = lazy(() => import("./canvas/Earth.jsx"));
 
 
 const Contact = () => {
@@ -16,6 +17,13 @@ const Contact = () => {
     email: "",
     message: "",
   });
+
+  const prefersReducedMotion = useMemo(
+    () =>
+      typeof window !== "undefined" &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches,
+    []
+  );
 
   const [loading, setLoading] = useState(false);
 
@@ -79,7 +87,22 @@ const Contact = () => {
             className="w-300 h-300"
             style={{ height: '600px', maxHeight: '800px' }}
           >
-            <EarthCanvas />
+            {prefersReducedMotion ? (
+              <div
+                role="img"
+                aria-label="Decorative 3D earth"
+                style={{
+                  height: "100%",
+                  borderRadius: "50%",
+                  background:
+                    "radial-gradient(circle at 35% 35%, #3b82f6 0%, #1e3a8a 60%, #0b1120 100%)",
+                }}
+              />
+            ) : (
+              <Suspense fallback={null}>
+                <EarthCanvas />
+              </Suspense>
+            )}
           </motion.div>
         </Col>
         

@@ -6,7 +6,12 @@ import Navbar from "./components/Navbar.jsx";
 import ScrollToTop from "./components/ScrollToTop.jsx";
 import Footer from "./components/Footer.jsx";
 import Chatbot from "./components/chatEngine/index.jsx";
-import Particle from "./components/Particle.jsx";
+
+const Particle = lazy(() => import("./components/Particle.jsx"));
+
+const prefersReducedMotion =
+  typeof window !== "undefined" &&
+  window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 const Home = lazy(() => import("./components/Home/Home.jsx"));
 const About = lazy(() => import("./components/About/About.jsx"));
@@ -32,7 +37,11 @@ function App() {
       <div className="App" id={load ? "no-scroll" : "scroll"}>
         <Navbar />
         <ScrollToTop />
-        <Particle />
+        {!prefersReducedMotion && (
+          <Suspense fallback={null}>
+            <Particle />
+          </Suspense>
+        )}
         <Suspense fallback={<div style={{ minHeight: "60vh" }} aria-hidden="true" />}>
           <Routes>
             <Route path="/" element={<Home />} />

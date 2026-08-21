@@ -1,10 +1,10 @@
 // projectsData.js
 import redshift from "../../assets/Projects/redshift.png";
-import cgen from "../../assets/Projects/cgen.png";
+import cgen from "../../assets/Projects/cgen.webp";
 import sentiment from "../../assets/Projects/sentiment.png";
 import emr from "../../assets/Projects/emr.png";
-import amazon from "../../assets/Projects/amazon.png";
-import coptic from "../../assets/Projects/coptic.png";
+import amazon from "../../assets/Projects/amazon.webp";
+import coptic from "../../assets/Projects/coptic.webp";
 import ocr from "../../assets/Projects/ocr.png";
 import postg from "../../assets/Projects/postg.png";
 import cassandra from "../../assets/Projects/cassandra.png";
