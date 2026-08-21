@@ -4,9 +4,8 @@ Issues raised by the external screenshot-based evaluation, each re-verified agai
 
 ## Critical
 
-- [ ] **P1. Apparent employment gap (site + PDF).**
-  Experience timeline and resume PDF show FORTE CLOUD ending **Jul 2025**, nothing after. Today is Aug 2026 → reads as a 13-month unexplained gap; recruiters may drop off here first.
-  *Owner decision:* user will supply post-Jul-2025 details later. Interim neutral entry added; replace when real content arrives. Also fix PDF separately (static asset).
+- [x] **P1. Apparent employment gap (site + PDF).**
+  RESOLVED via `specs/linkerdin.md` sync: Bexprt AI Delivery Engineer (Apr 2026 – Present) added, FORTE CLOUD corrected to Jul 2023 – Apr 2026, Microsoft ML Researcher internship (Sep 2022 – Feb 2023) restored. Timeline is gap-free on the site. Resume PDF (`Mohamed-Bekheet_page-0001.jpg`) still shows old dates — regenerate from updated resume (static asset, owner action).
 
 ## High
 
@@ -26,7 +25,7 @@ Issues raised by the external screenshot-based evaluation, each re-verified agai
 
 - [x] **P10. Date typo:** `"Jul 2023 - july 2025"` (lowercase july) in `experiecesContent.js`.
 - [x] **P11. Skills marquee clipped edges** have no fade/scroll affordance — rows appear cut off. Add gradient masks.
-- [ ] **P12. Dead `'&:hover'` inline style** in Testimonials `imgStyle2` — FIXED this round (moved to `App.css`).
+- [x] **P12. Dead `'&:hover'` inline style** in Testimonials `imgStyle2` — FIXED this round (moved to `App.css`).
 - [x] **P13. Production sourcemaps ship ~18 MB** alongside a 2.9 MB main bundle — disable or use `hidden`.
 
 ## Investigated — not reproducible / verified OK
@@ -38,5 +37,15 @@ Issues raised by the external screenshot-based evaluation, each re-verified agai
 | Resume download | Real PDF asset served from `/assets/*.pdf` (not just an embed); PDF itself is image-based — make it text-selectable/ATS-friendly |
 | Duplicate React keys in Testimonials | **Fixed earlier today** (unique ids); wrong Elesawy link fixed |
 | Mobile zoom-out / unclickable nav | **Fixed earlier today** (`overflow-x: hidden`) |
+| Unused 60 MB `public/earth/` GLTF textures | **Removed** — only `public/planet/` is referenced; dist shrank 78 MB → 38 MB |
+
+## Round 3 enhancement plan (Aug 22, 2026) — all shipped
+
+- Content sync from `linkerdin.md`: Bexprt role, corrected dates, Microsoft internship, Claude Certified Architect cert, new typewriter roles, chatbot persona updated.
+- Blog route wired (`/blog` + navbar link), `react-markdown` installed.
+- Perf: bootstrap CSS bundled locally (no CDN render-blocking JS/CSS), fonts async with `media=print` swap trick, `React.lazy` route splitting + lazy EarthCanvas/tsparticles, WebP hero/avatar/top project images (~95% smaller), hidden sourcemaps, reduced-motion fallbacks. Prerendered static HTML per route in postbuild for crawlers/agentic browsing.
+- Security: CSP + hardening headers shipped for both Vercel (`vercel.json`) and Netlify (`public/_headers`); wildcard CORS removed.
+
+*Remaining owner actions:* regenerate resume PDF with current dates; replace Claude cert placeholder image; supply real Elesawy LinkedIn URL; compress remaining SVG assets if desired.
 
 *Note: CopticTrans and CardioAI already lead `projectsData.js`; the perceived ordering issue comes from card layout scanning — coursework labeling (P4) addresses it.*

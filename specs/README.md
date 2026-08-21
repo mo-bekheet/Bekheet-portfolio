@@ -25,7 +25,7 @@ Turned the PageSpeed Insights (mobile + desktop) and Snyk header-scan reports in
 - [`agentic-browsing.md`](./agentic-browsing.md) — AI-agent browsability checks
 - [`security-headers.md`](./security-headers.md) — missing/misconfigured HTTP security headers
 - [`portfolio-evaluation.md`](./portfolio-evaluation.md) — full evaluation (UI/UX, content, branding, recruiter view) + test suite docs (Aug 22, 2026)
-- [`problems.md`](./problems.md) — round-2 issue register from external screenshot review; P2–P11, P13 fixed same day (Aug 22, 2026); P1 awaiting owner input on post-2025 role
+- [`problems.md`](./problems.md) — round-2 issue register from external screenshot review; **all P1–P13 closed** (Aug 22, 2026). Round-3 enhancement plan shipped same day: content sync from `linkerdin.md`, blog route, perf overhaul (lazy routes/WebP/prerender), security headers for Vercel+Netlify.
 
 ## Suggested priority order
 
