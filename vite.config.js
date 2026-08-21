@@ -34,7 +34,7 @@ export default defineConfig(({ mode }) => {
     },
     build: {
       outDir: 'dist',
-      sourcemap: true,
+      sourcemap: 'hidden',
       rollupOptions: {
         output: {
           manualChunks: {
