@@ -15,10 +15,7 @@ const imgStyle2 = {
   margin: '40px',
   borderRadius: '50%',
   border: '2px solid #c770f0',
-  transition: 'transform 0.3s ease-in-out',
-  '&:hover': {
-    transform: 'scale(1.1)'
-  }
+  transition: 'transform 0.3s ease-in-out'
 };
 
 const CustomArrow = ({ className, style, onClick }) => (
@@ -106,7 +103,7 @@ const Testimonials = () => {
     {
       id: 6,
       imgSrc: '/Testimonial/img6.jpg',
-      link: 'https://www.linkedin.com/in/eslamelassal/',
+      link: 'https://www.linkedin.com/search/results/all/?keywords=Mohamed%20Elesawy%20FORTE%20CLOUD',
       quote:
         "I enjoyed working with Bekheet during my master’s degree and in a professional setting while working in Forte Cloud. He is deeply dedicated to his work, sometimes to a fault, and consistently strives to think outside the box, bringing creative ideas that drive progress. What truly sets him apart is his unwavering passion for gaining knowledge and continuously improving himself.",
       clientName: 'Mohamed Elesawy',
@@ -114,7 +111,7 @@ const Testimonials = () => {
       delay: 1.1,
     },
      {
-      id: 6,
+      id: 7,
       imgSrc: '/Testimonial/img7.jpg',
       link: 'https://www.linkedin.com/in/1mohamed-salah/',
       quote:
@@ -129,13 +126,13 @@ const Testimonials = () => {
   return (
     <div className="container-fluid py-5 my-5" id="testimonial">
       <div className="container-fluid py-5">
-        <h1
+        <h2
           className="display-5 text-center mb-5 wow fadeInUp"
           data-wow-delay="0.1s"
           style={{ color: 'WhiteSmoke' }}
         >
           Testimonial
-        </h1>
+        </h2>
         <div className="row justify-content-center">
           <div className="col-lg-3 d-none d-lg-block">
             <div className="testimonial-left h-100" style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '10px' }}>
