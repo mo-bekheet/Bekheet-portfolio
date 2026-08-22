@@ -16,7 +16,7 @@ import WorkspacePremiumIcon from '@mui/icons-material/WorkspacePremium';
 import FormatQuoteIcon from '@mui/icons-material/FormatQuote';
 import PersonIcon from '@mui/icons-material/Person';
 import RefreshIcon from '@mui/icons-material/Refresh';
-import { fetchCounts, profileApi } from '../../lib/api.js';
+import { fetchCounts } from '../../lib/api.js';
 import { isSupabaseConfigured } from '../../lib/supabase.js';
 import useAppStore from '../../store/useAppStore.js';
 

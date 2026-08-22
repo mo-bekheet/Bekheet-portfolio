@@ -1,4 +1,4 @@
-import { Link, Typography } from '@mui/material';
+import { Typography } from '@mui/material';
 import CrudSection from './CrudSection.jsx';
 import { PublishedChip } from './components/CrudTable.jsx';
 import { postsApi } from '../../lib/api.js';

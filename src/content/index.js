@@ -1,5 +1,5 @@
 import { projectData } from '../components/Projects/projectsData.js';
-import { experiences } from '../components/About/experiecesContent.js';
+import experiences from '../components/About/experiecesContent.js';
 import { certifications } from '../components/Certificate/certificationData.js';
 
 export const samplePosts = [

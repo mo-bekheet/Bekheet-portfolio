@@ -140,7 +140,9 @@ export default function CrudTable({
             ))}
           </TableBody>
         </Table>
-    </TableContainer>
-  </Paper>
-);
+      </TableContainer>
+    </Paper>
+  );
+}
+
 
