@@ -26,3 +26,6 @@ create policy "media_admin_delete" on storage.objects
 alter table public.profile
   add column if not exists resume_preview_url text,
   add column if not exists hero_image_url text;
+
+alter table public.experience
+  add column if not exists icon_url text;

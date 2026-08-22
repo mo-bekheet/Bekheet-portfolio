@@ -27,6 +27,12 @@ const formFields = [
   { name: 'link', label: 'Company link' },
   { name: 'icon_bg', label: 'Icon background color', placeholder: '#c95bf5' },
   {
+    name: 'icon_url',
+    label: 'Company logo',
+    type: 'image',
+    folder: 'experience'
+  },
+  {
     name: 'points',
     label: 'Highlights',
     type: 'list',
