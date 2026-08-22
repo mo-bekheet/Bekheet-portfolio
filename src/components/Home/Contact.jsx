@@ -1,6 +1,7 @@
 import React, { Suspense, lazy, useMemo, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import emailjs from "@emailjs/browser";
+import { messagesApi } from "../../lib/api.js";
 import { SectionWrapper } from "../hoc";
 import { slideIn } from "../utils/motion";
 import { Container, Row, Col } from "react-bootstrap";
@@ -41,22 +42,33 @@ const Contact = () => {
     e.preventDefault();
     setLoading(true);
 
-    emailjs
-      .send(
-        'service_e5ycsfe',
-        'template_x0cxs2o',
-        {
-          from_name: form.name,
-          to_name: "Mohamed Bekheet",
-          from_email: form.email,
-          to_email: "mohamedbekheet33@gmail.com",
-          message: form.message,
-        },
-        'US2HFHJEPrK2NEtJ2',
-      )
-      .then(
-        () => {
-          setLoading(false);
+    const sendEmail = emailjs.send(
+      'service_e5ycsfe',
+      'template_x0cxs2o',
+      {
+        from_name: form.name,
+        to_name: "Mohamed Bekheet",
+        from_email: form.email,
+        to_email: "mohamedbekheet33@gmail.com",
+        message: form.message,
+      },
+      'US2HFHJEPrK2NEtJ2',
+    );
+
+    const saveToInbox = messagesApi
+      .create({ name: form.name, email: form.email, message: form.message })
+      .catch((err) => {
+        console.warn("Message saved to inbox failed:", err);
+      });
+
+    Promise.allSettled([sendEmail, saveToInbox]).then(
+      ([emailResult, inboxResult]) => {
+        setLoading(false);
+
+        if (
+          emailResult.status === "fulfilled" ||
+          inboxResult.status === "fulfilled"
+        ) {
           alert("Thank you. I will get back to you as soon as possible.");
 
           setForm({
@@ -64,14 +76,12 @@ const Contact = () => {
             email: "",
             message: "",
           });
-        },
-        (error) => {
-          setLoading(false);
-          console.error(error);
-
+        } else {
+          console.error(emailResult.reason);
           alert("Ahh, something went wrong. Please try again.");
         }
-      );
+      }
+    );
   };
 
 
