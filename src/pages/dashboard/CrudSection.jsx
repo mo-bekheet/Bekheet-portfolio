@@ -5,6 +5,7 @@ import useCrudPage from './useCrudPage.js';
 
 export default function CrudSection({
   api,
+  section,
   tableTitle,
   tableSubtitle,
   columns,
@@ -12,7 +13,7 @@ export default function CrudSection({
   addLabel = 'Add new',
   nameOfRow = (row) => row.title || `#${row.id}`
 }) {
-  const page = useCrudPage(api);
+  const page = useCrudPage(api, section);
 
   const dialogTitle = page.dialog.row ? `Edit ${nameOfRow(page.dialog.row)}` : addLabel;
 

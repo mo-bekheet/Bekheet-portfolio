@@ -54,6 +54,7 @@ export default function ManageCertifications() {
   return (
     <CrudSection
       api={certificationsApi}
+      section="certifications"
       tableTitle="Certifications"
       tableSubtitle="Certificates shown on the Certifications page"
       columns={columns}

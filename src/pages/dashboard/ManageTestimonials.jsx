@@ -60,6 +60,7 @@ export default function ManageTestimonials() {
   return (
     <CrudSection
       api={testimonialsApi}
+      section="testimonials"
       tableTitle="Testimonials"
       tableSubtitle="Recommendations shown on the home page slider"
       columns={columns}

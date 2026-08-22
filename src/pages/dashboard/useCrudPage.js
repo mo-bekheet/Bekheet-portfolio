@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
+import useAppStore from '../../store/useAppStore';
 
-export default function useCrudPage(api) {
+export default function useCrudPage(api, section) {
   const [rows, setRows] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -8,6 +9,10 @@ export default function useCrudPage(api) {
   const [saving, setSaving] = useState(false);
   const [formError, setFormError] = useState(null);
   const [snackbar, setSnackbar] = useState(null);
+
+  const invalidatePublicCache = useCallback(() => {
+    if (section) useAppStore.getState().setContent(section, null);
+  }, [section]);
 
   const reload = useCallback(async () => {
     setLoading(true);
@@ -49,6 +54,7 @@ export default function useCrudPage(api) {
         await api.create(values);
         setSnackbar({ message: 'Created', severity: 'success' });
       }
+      invalidatePublicCache();
       closeDialog();
       await reload();
     } catch (err) {
@@ -62,6 +68,7 @@ export default function useCrudPage(api) {
     try {
       await api.remove(row.id);
       setRows((prev) => prev.filter((r) => r.id !== row.id));
+      invalidatePublicCache();
       setSnackbar({ message: 'Deleted', severity: 'success' });
     } catch (err) {
       setSnackbar({ message: err.message || String(err), severity: 'error' });

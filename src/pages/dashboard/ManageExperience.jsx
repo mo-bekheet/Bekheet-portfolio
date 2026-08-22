@@ -46,6 +46,7 @@ export default function ManageExperience() {
   return (
     <CrudSection
       api={experienceApi}
+      section="experience"
       tableTitle="Experience"
       tableSubtitle="Work history timeline entries"
       columns={columns}

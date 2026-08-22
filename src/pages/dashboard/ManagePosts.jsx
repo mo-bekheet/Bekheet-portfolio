@@ -44,6 +44,7 @@ export default function ManagePosts() {
   return (
     <CrudSection
       api={postsApi}
+      section="posts"
       tableTitle="Blog Posts"
       tableSubtitle="Markdown posts rendered on the Blog page"
       columns={columns}

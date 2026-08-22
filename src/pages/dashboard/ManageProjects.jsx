@@ -55,6 +55,7 @@ export default function ManageProjects() {
   return (
     <CrudSection
       api={projectsApi}
+      section="projects"
       tableTitle="Projects"
       tableSubtitle="Shown on the Projects page"
       columns={columns}
