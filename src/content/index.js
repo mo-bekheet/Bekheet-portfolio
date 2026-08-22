@@ -89,6 +89,38 @@ export const sampleTestimonials = [
   }
 ];
 
+export const staticProfile = {
+  full_name: 'Mohamed Bekheet',
+  tagline: 'Machine Learning Engineer',
+  roles: [
+    'AI Delivery Engineer',
+    'Agentic AI Engineer',
+    'Machine Learning Engineer',
+    'Generative AI Specialist',
+    'Computer Vision Engineer'
+  ],
+  bio: [
+    "I'm **Mohamed Bekheet**, a **Machine Learning Engineer** specializing in designing and deploying production-grade AI systems that solve real business problems.",
+    'My work focuses on applied AI across **Computer Vision, Generative AI, MLOps, and Data Science**, where I build scalable solutions that transform complex workflows into automated, intelligent processes.',
+    "I'm proficient in **Python** as my primary development language, with additional experience in *C++, Java, JavaScript, and R*, enabling me to design end-to-end systems from data pipelines to model deployment.",
+    'My core expertise includes **Computer Vision, Optical Character Recognition (OCR), Generative AI, Retrieval-Augmented Generation (RAG), and AI Agents** — allowing me to deliver advanced AI applications for real-world environments.',
+    'I have hands-on experience architecting scalable ML solutions on **AWS**, including *SageMaker and Bedrock*, as well as deploying models across cloud, on-premise, and edge environments to meet performance, latency, and reliability requirements.',
+    'Driven by continuous learning, I actively explore **emerging AI technologies** and *optimize systems* for efficiency, scalability, and long-term maintainability.'
+  ].join('\n\n'),
+  location: '',
+  email: '',
+  phone: '',
+  resume_url: null,
+  resume_preview_url: null,
+  hero_image_url: null,
+  avatar_url: null,
+  github_url: 'https://github.bekheet.com',
+  linkedin_url: 'https://linkedin.bekheet.com/',
+  kaggle_url: 'https://kaggle.bekheet.com',
+  dev_url: 'https://dev.to/mohamed-bekheet',
+  whatsapp_url: 'https://chatwith.io/s/mohamed-bekheet'
+};
+
 export const staticSections = {
   posts: samplePosts,
   projects: projectData,

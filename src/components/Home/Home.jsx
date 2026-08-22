@@ -13,16 +13,18 @@ import { ImLinkedin } from 'react-icons/im';
 import { SiKaggle } from 'react-icons/si';
 import Tilt from "react-parallax-tilt";
 import "./style.css";
+import { useSiteProfile } from "../../hooks/useSiteProfile.js";
 
 function Home() {
-  const [sessionId, setSessionId] = useState('');
+  const profile = useSiteProfile();
 
-
-
-  const processWithLangChain = async (message, sessionId) => {
-    const response = `Processed message "${message}" for session: ${sessionId}`;
-    return response;
-  };
+  const socialLinks = [
+    { key: 'whatsapp', url: profile.whatsapp_url, icon: <FaWhatsapp />, label: 'Chat on WhatsApp' },
+    { key: 'github', url: profile.github_url, icon: <AiOutlineGithub />, label: 'Follow on GitHub' },
+    { key: 'linkedin', url: profile.linkedin_url, icon: <ImLinkedin />, label: 'Connect on LinkedIn' },
+    { key: 'kaggle', url: profile.kaggle_url, icon: <SiKaggle />, label: 'Follow on Kaggle' },
+    { key: 'dev', url: profile.dev_url, icon: <FaDev />, label: 'Read my articles on Dev.to' }
+  ].filter((link) => link.url);
 
   return (
     <section>
@@ -40,7 +42,7 @@ function Home() {
 
               <h1 className="heading-name">
                 I'M
-                <strong className="main-name"> Mohamed Bekheet</strong>
+                <strong className="main-name"> {profile.full_name || "Mohamed Bekheet"}</strong>
               </h1>
 
               <div style={{ padding: "30px 50px", textAlign: "left" }}>
@@ -48,41 +50,16 @@ function Home() {
               </div>
 
               <div className="social-links-container" style={{ marginTop: "40px" }}>
-                  <a href="https://chatwith.io/s/mohamed-bekheet" 
-                     target="_blank" 
-                     rel="noopener noreferrer"
-                     className="social-link"
-                     data-tooltip="Chat on WhatsApp" aria-label="Chat on WhatsApp">
-                        <FaWhatsapp />
-                  </a>    
-                  <a href="https://github.bekheet.com" 
-                     target="_blank" 
-                     rel="noopener noreferrer"
-                     className="social-link"
-                     data-tooltip="Follow on GitHub" aria-label="Follow on GitHub">
-                    <AiOutlineGithub />
-                  </a>
-                  <a href="https://linkedin.bekheet.com/" 
-                     target="_blank" 
-                     rel="noopener noreferrer"
-                     className="social-link"
-                     data-tooltip="Connect on LinkedIn" aria-label="Connect on LinkedIn">
-                    <ImLinkedin />
-                  </a>
-                  <a href="https://kaggle.bekheet.com" 
-                     target="_blank" 
-                     rel="noopener noreferrer"
-                     className="social-link"
-                     data-tooltip="Follow on Kaggle" aria-label="Follow on Kaggle">
-                    <SiKaggle />
-                  </a>
-                  <a href="https://dev.to/mohamed-bekheet" 
-                     target="_blank" 
-                     rel="noopener noreferrer"
-                     className="social-link"
-                     data-tooltip="Read on Dev.to" aria-label="Read my articles on Dev.to">
-                    <FaDev />
-                  </a>
+                  {socialLinks.map((link) => (
+                    <a key={link.key}
+                       href={link.url}
+                       target="_blank"
+                       rel="noopener noreferrer"
+                       className="social-link"
+                       data-tooltip={link.label} aria-label={link.label}>
+                      {link.icon}
+                    </a>
+                  ))}
               </div>
  
             </Col>
@@ -90,7 +67,7 @@ function Home() {
             <Col md={5} style={{ paddingBottom: 20 }}>
             <Tilt>
               <img
-                src={homeLogo}
+                src={profile.hero_image_url || homeLogo}
                 alt="home pic"
                 className="img-fluid"
                 style={{ maxHeight: "800px" }}
