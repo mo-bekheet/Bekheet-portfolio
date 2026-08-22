@@ -14,6 +14,7 @@ import {
 import SaveIcon from '@mui/icons-material/Save';
 import { profileApi } from '../../lib/api.js';
 import useAppStore from '../../store/useAppStore.js';
+import ImageField from './components/ImageField.jsx';
 
 const EMPTY = {
   full_name: '',
@@ -24,6 +25,8 @@ const EMPTY = {
   email: '',
   phone: '',
   resume_url: '',
+  resume_preview_url: '',
+  hero_image_url: '',
   avatar_url: '',
   github_url: '',
   linkedin_url: '',
@@ -44,13 +47,18 @@ const CONTACT = [
 ];
 
 const LINKS = [
-  { name: 'resume_url', label: 'Resume URL' },
-  { name: 'avatar_url', label: 'Avatar image URL' },
   { name: 'github_url', label: 'GitHub URL' },
   { name: 'linkedin_url', label: 'LinkedIn URL' },
   { name: 'kaggle_url', label: 'Kaggle URL' },
   { name: 'dev_url', label: 'Dev.to URL' },
   { name: 'whatsapp_url', label: 'WhatsApp URL' }
+];
+
+const MEDIA = [
+  { name: 'resume_url', label: 'Resume PDF', accept: 'application/pdf', folder: 'resume' },
+  { name: 'resume_preview_url', label: 'Resume preview image', folder: 'resume' },
+  { name: 'hero_image_url', label: 'Home hero image', folder: 'profile' },
+  { name: 'avatar_url', label: 'Avatar image', folder: 'profile' }
 ];
 
 export default function ManageProfile() {
@@ -188,7 +196,7 @@ export default function ManageProfile() {
         <Divider sx={{ my: 3 }} />
 
         <Typography variant="subtitle1" fontWeight={700} gutterBottom>
-          Links & media
+          Links
         </Typography>
         <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', sm: '1fr 1fr' }, gap: 2.5 }}>
           {LINKS.map((field) => (
@@ -198,6 +206,24 @@ export default function ManageProfile() {
               size="small"
               value={values[field.name] ?? ''}
               onChange={(e) => handleChange(field.name, e.target.value)}
+            />
+          ))}
+        </Box>
+
+        <Divider sx={{ my: 3 }} />
+
+        <Typography variant="subtitle1" fontWeight={700} gutterBottom>
+          Media
+        </Typography>
+        <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', sm: '1fr 1fr' }, gap: 3 }}>
+          {MEDIA.map((field) => (
+            <ImageField
+              key={field.name}
+              label={field.label}
+              accept={field.accept || 'image/*'}
+              folder={field.folder}
+              value={values[field.name] ?? ''}
+              onChange={(v) => handleChange(field.name, v)}
             />
           ))}
         </Box>

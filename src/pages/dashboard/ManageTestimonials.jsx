@@ -50,7 +50,7 @@ const formFields = [
   { name: 'client_name', label: 'Name', required: true },
   { name: 'profession', label: 'Profession / role' },
   { name: 'quote', label: 'Quote', type: 'textarea', rows: 5, required: true },
-  { name: 'avatar_url', label: 'Avatar image URL' },
+  { name: 'avatar_url', label: 'Photo', type: 'image', folder: 'testimonials' },
   { name: 'link', label: 'LinkedIn or website link' },
   { name: 'sort_order', label: 'Sort order', type: 'number', helper: 'Lower numbers appear first' },
   { name: 'published', label: 'Published', type: 'switch' }

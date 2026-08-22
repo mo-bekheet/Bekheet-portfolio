@@ -14,6 +14,7 @@ import {
   TextField
 } from '@mui/material';
 import { buildDraft, draftToValues, findMissingRequired } from './formUtils.js';
+import ImageField from './ImageField.jsx';
 
 export default function CrudFormDialog({
   open,
@@ -64,6 +65,18 @@ export default function CrudFormDialog({
                       />
                     }
                     label={field.label}
+                  />
+                );
+              }
+              if (field.type === 'image') {
+                return (
+                  <ImageField
+                    key={field.name}
+                    label={field.label}
+                    value={draft[field.name] ?? ''}
+                    onChange={(v) => handleChange(field.name, v)}
+                    folder={field.folder || 'misc'}
+                    accept={field.accept || 'image/*'}
                   />
                 );
               }

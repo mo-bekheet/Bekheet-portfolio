@@ -16,11 +16,11 @@ const columns = [
   },
   {
     field: 'link',
-    label: 'Link',
+    label: 'Credly',
     render: (row) =>
       row.link && row.link !== '#' ? (
         <Link href={row.link} target="_blank" rel="noopener noreferrer">
-          Verify
+          Verify on Credly ↗
         </Link>
       ) : (
         '—'
@@ -37,10 +37,15 @@ const columns = [
 const formFields = [
   { name: 'title', label: 'Certification title', required: true },
   { name: 'description', label: 'Description', type: 'textarea', rows: 3 },
-  { name: 'image_url', label: 'Badge image URL', placeholder: 'https://…' },
+  { name: 'image_url', label: 'Badge image', type: 'image', folder: 'certifications' },
   { name: 'alt', label: 'Image alt text' },
   { name: 'issue_date', label: 'Issue date', placeholder: 'Jun 2026' },
-  { name: 'link', label: 'Verification link' },
+  {
+    name: 'link',
+    label: 'Credly badge URL',
+    placeholder: 'https://www.credly.com/badges/…/public_url',
+    helper: 'Verification link on credly.com'
+  },
   { name: 'sort_order', label: 'Sort order', type: 'number', helper: 'Lower numbers appear first' },
   { name: 'published', label: 'Published', type: 'switch' }
 ];

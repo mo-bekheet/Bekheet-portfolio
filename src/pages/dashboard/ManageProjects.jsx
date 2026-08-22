@@ -33,7 +33,7 @@ const columns = [
 const formFields = [
   { name: 'title', label: 'Title', required: true },
   { name: 'description', label: 'Description', type: 'textarea', rows: 4 },
-  { name: 'image_url', label: 'Image URL', placeholder: 'https://…' },
+  { name: 'image_url', label: 'Project image', type: 'image', folder: 'projects' },
   { name: 'gh_link', label: 'GitHub link' },
   { name: 'demo_link', label: 'Demo link' },
   {
