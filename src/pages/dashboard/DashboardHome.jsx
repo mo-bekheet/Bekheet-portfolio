@@ -3,8 +3,6 @@ import { Link as RouterLink } from 'react-router-dom';
 import {
   Alert,
   Box,
-  Button,
-  Chip,
   Paper,
   Stack,
   Typography
@@ -15,7 +13,6 @@ import WorkHistoryIcon from '@mui/icons-material/WorkHistory';
 import WorkspacePremiumIcon from '@mui/icons-material/WorkspacePremium';
 import FormatQuoteIcon from '@mui/icons-material/FormatQuote';
 import PersonIcon from '@mui/icons-material/Person';
-import RefreshIcon from '@mui/icons-material/Refresh';
 import { fetchCounts } from '../../lib/api.js';
 import { isSupabaseConfigured } from '../../lib/supabase.js';
 import useAppStore from '../../store/useAppStore.js';
@@ -118,30 +115,6 @@ export default function DashboardHome() {
           </Paper>
         ))}
       </Box>
-
-      <Paper elevation={0} sx={{ p: 2.5, border: '1px solid', borderColor: 'divider' }}>
-        <Stack direction={{ xs: 'column', sm: 'row' }} alignItems={{ sm: 'center' }} spacing={2}>
-          <Box sx={{ flexGrow: 1 }}>
-            <Stack direction="row" spacing={1.5} alignItems="center">
-              <Typography variant="subtitle1" fontWeight={700}>
-                Setup checklist
-              </Typography>
-              <Chip
-                size="small"
-                label={isSupabaseConfigured ? 'Keys loaded' : 'Keys missing'}
-                color={isSupabaseConfigured ? 'success' : 'warning'}
-                variant="outlined"
-              />
-            </Stack>
-            <Typography variant="body2" color="text.secondary" sx={{ mt: 1 }}>
-              1. Run <strong>supabase/schema.sql</strong> in the SQL Editor · 2. Create your admin user under Authentication → Users · 3. Start managing content.
-            </Typography>
-          </Box>
-          <Button variant="outlined" startIcon={<RefreshIcon />} onClick={() => window.location.reload()}>
-            Recheck
-          </Button>
-        </Stack>
-      </Paper>
     </Stack>
   );
 }
