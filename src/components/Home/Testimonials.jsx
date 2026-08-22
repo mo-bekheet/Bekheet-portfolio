@@ -3,7 +3,8 @@ import { FaQuoteLeft } from 'react-icons/fa';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import { sampleTestimonials as testimonials } from '../../content/index.js';
+import { sampleTestimonials as staticTestimonials } from '../../content/index.js';
+import { useContent } from '../../hooks/useContent';
 const imgStyle = {
   width: '150px',
   height: '150px',
@@ -28,6 +29,22 @@ const CustomArrow = ({ className, style, onClick }) => (
 );
 
 const Testimonials = () => {
+  const { content } = useContent('testimonials');
+  const testimonials = (content ?? []).map((t, i) => {
+    const fallback =
+      staticTestimonials.find(
+        (s) => s.clientName === (t.clientName ?? t.client_name)
+      ) ?? {};
+    return {
+      id: t.id ?? i,
+      imgSrc: t.imgSrc ?? t.avatar_url ?? fallback.imgSrc,
+      link: t.link ?? fallback.link ?? '',
+      quote: t.quote,
+      clientName: t.clientName ?? t.client_name,
+      profession: t.profession,
+      delay: t.delay ?? fallback.delay
+    };
+  });
   const sliderSettings = {
     dots: true,
     infinite: true,
@@ -77,7 +94,7 @@ const Testimonials = () => {
             </div>
           </div>
           <div className="col-lg-6 wow fadeInUp" data-wow-delay="0.3s">
-            <Slider {...sliderSettings}>
+            <Slider {...sliderSettings} key={testimonials.length}>
               {testimonials.map((testimonial) => (
                 <div
                   key={testimonial.id}

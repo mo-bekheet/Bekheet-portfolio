@@ -7,7 +7,7 @@ import { motion } from "framer-motion";
 
 import "react-vertical-timeline-component/style.min.css";
 
-import experiences from "./experiecesContent.js"; 
+import { useContent } from "../../hooks/useContent";
 import { SectionWrapper } from "../hoc/index.js";
 import StarIcon from '@mui/icons-material/Star';
 
@@ -130,6 +130,12 @@ contentArrowStyle={{
 };
 
 const ExperienceJourney = () => {
+  const { content } = useContent("experience");
+  const experiences = (content ?? []).map((experience, index) => ({
+    ...experience,
+    date: experience.date ?? experience.date_range,
+    icon: experience.icon ?? experience.icon_url,
+  }));
   return (
     <>
       <motion.div id="experience">
@@ -142,7 +148,7 @@ const ExperienceJourney = () => {
         <VerticalTimeline>
           {experiences.map((experience, index) => (
             <ExperienceCard
-              key={`experience-${index}`}
+              key={experience.id ?? `experience-${index}`}
               experience={experience}
             />
           ))}

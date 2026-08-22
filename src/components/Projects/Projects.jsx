@@ -4,8 +4,12 @@ import ProjectCard from "./ProjectCards";
 // import Particle from "../Particle";
 
 import { projectData } from "./projectsData";
+import { useContent } from "../../hooks/useContent";
+
+const staticByTitle = Object.fromEntries(projectData.map((p) => [p.title, p]));
 
 function Projects() {
+  const { content } = useContent("projects");
   return (
     <Container fluid className="project-section">
       {/* <Particle /> */}
@@ -17,17 +21,21 @@ function Projects() {
           Here are selected projects showcasing my expertise and experience.
         </p>
         <Row style={{ justifyContent: "center", paddingBottom: "10px" }}>
-          {projectData.map((project, index) => (
-            <Col md={4} className="project-card" key={index}>
-              <ProjectCard
-                imgPath={project.imgPath}
-                isBlog={project.isBlog}
-                title={project.title}
-                description={project.description}
-                ghLink={project.ghLink}
-              />
-            </Col>
-          ))}
+          {(content ?? []).map((project, index) => {
+            const fallback = staticByTitle[project.title] ?? {};
+            return (
+              <Col md={4} className="project-card" key={project.id ?? index}>
+                <ProjectCard
+                  imgPath={project.imgPath || project.image_url || fallback.imgPath}
+                  isBlog={project.isBlog ?? false}
+                  title={project.title}
+                  description={project.description}
+                  ghLink={project.ghLink || project.gh_link}
+                  demoLink={project.demoLink || project.demo_link}
+                />
+              </Col>
+            );
+          })}
         </Row>
       </Container>
     </Container>
