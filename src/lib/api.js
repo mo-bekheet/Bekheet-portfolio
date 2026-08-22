@@ -158,7 +158,7 @@ function getSessionId() {
 }
 
 export function trackPageView(path) {
-  if (!isSupabaseConfigured || navigator.webdriver) return Promise.resolve(null);
+  if (!isSupabaseConfigured || navigator.webdriver) return;
   let referrer = null;
   try {
     if (document.referrer && new URL(document.referrer).host !== window.location.host) {
@@ -167,15 +167,24 @@ export function trackPageView(path) {
   } catch {
     referrer = null;
   }
-  return supabase
+  supabase
     .from('page_views')
     .insert({ path, referrer, device: detectDevice(), session_id: getSessionId() })
-    .catch(() => {});
+    .then(
+      () => {},
+      () => {}
+    );
 }
 
 export function trackLinkClick(url, pagePath) {
-  if (!isSupabaseConfigured || navigator.webdriver) return Promise.resolve(null);
-  return supabase.from('link_clicks').insert({ url, page_path: pagePath }).catch(() => {});
+  if (!isSupabaseConfigured || navigator.webdriver) return;
+  supabase
+    .from('link_clicks')
+    .insert({ url, page_path: pagePath })
+    .then(
+      () => {},
+      () => {}
+    );
 }
 
 const daysAgoIso = (days) => new Date(Date.now() - days * 86400000).toISOString();
