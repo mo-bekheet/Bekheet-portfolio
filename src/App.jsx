@@ -8,6 +8,7 @@ import Chatbot from "./components/chatEngine/index.jsx";
 import Particle from "./components/Particle.jsx";
 import Preloader from "./components/Pre.jsx";
 import { AuthProvider } from "./hooks/useAuth.jsx";
+import useTracking from "./hooks/useTracking.js";
 
 const Home = lazy(() => import("./components/Home/Home.jsx"));
 const About = lazy(() => import("./components/About/About.jsx"));
@@ -26,6 +27,8 @@ const ManagePosts = lazy(() => import("./pages/dashboard/ManagePosts.jsx"));
 const ManageExperience = lazy(() => import("./pages/dashboard/ManageExperience.jsx"));
 const ManageCertifications = lazy(() => import("./pages/dashboard/ManageCertifications.jsx"));
 const ManageTestimonials = lazy(() => import("./pages/dashboard/ManageTestimonials.jsx"));
+const ManageMessages = lazy(() => import("./pages/dashboard/ManageMessages.jsx"));
+const DashboardAnalytics = lazy(() => import("./pages/dashboard/DashboardAnalytics.jsx"));
 
 const SuspenseFallback = () => <div style={{ minHeight: "60vh" }} aria-hidden="true" />;
 
@@ -42,6 +45,8 @@ function AdminArea() {
           <Route path="experience" element={<ManageExperience />} />
           <Route path="certifications" element={<ManageCertifications />} />
           <Route path="testimonials" element={<ManageTestimonials />} />
+          <Route path="inbox" element={<ManageMessages />} />
+          <Route path="analytics" element={<DashboardAnalytics />} />
           <Route path="*" element={<Navigate to="/admin" replace />} />
         </Route>
       </Route>
@@ -51,6 +56,7 @@ function AdminArea() {
 }
 
 function PublicArea({ load }) {
+  useTracking();
   return (
     <>
       <div className="App" id={load ? "no-scroll" : "scroll"}>

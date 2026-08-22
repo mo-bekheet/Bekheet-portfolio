@@ -22,6 +22,8 @@ import MenuIcon from '@mui/icons-material/Menu';
 import LogoutIcon from '@mui/icons-material/Logout';
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 import DashboardIcon from '@mui/icons-material/Dashboard';
+import InsightsIcon from '@mui/icons-material/Insights';
+import InboxIcon from '@mui/icons-material/Inbox';
 import PersonIcon from '@mui/icons-material/Person';
 import FolderOpenIcon from '@mui/icons-material/FolderOpen';
 import ArticleIcon from '@mui/icons-material/Article';
@@ -37,6 +39,8 @@ const DRAWER_WIDTH = 264;
 
 const NAV_ITEMS = [
   { to: '/admin', label: 'Overview', icon: <DashboardIcon />, end: true },
+  { to: '/admin/analytics', label: 'Analytics', icon: <InsightsIcon /> },
+  { to: '/admin/inbox', label: 'Inbox', icon: <InboxIcon /> },
   { to: '/admin/profile', label: 'Profile', icon: <PersonIcon /> },
   { to: '/admin/projects', label: 'Projects', icon: <FolderOpenIcon /> },
   { to: '/admin/posts', label: 'Blog Posts', icon: <ArticleIcon /> },
