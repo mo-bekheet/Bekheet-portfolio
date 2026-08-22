@@ -1,53 +1,41 @@
-import GeminiService from './GenAI';
-
-let geminiService = null;
+const CHAT_PROXY_URL = '/.netlify/functions/chat-proxy';
 
 class ChatService {
-  static async initializeChat() {
-    if (!geminiService) {
-      try {
-        const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
-        if (!apiKey) {
-          throw new Error('Gemini API key not found in environment variables');
-        }
-        
-        geminiService = new GeminiService(apiKey);
-      } catch (error) {
-        console.error('Error initializing Gemini service:', error);
-        throw error;
-      }
-    }
-  }
-
   static async sendMessage(message) {
     try {
-      await this.initializeChat();
+      const response = await fetch(CHAT_PROXY_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message }),
+      });
 
-      const responseText = await geminiService.sendMessage(message);
-      
-      return { message: responseText };
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Chat service request failed');
+      }
+
+      return { message: data.reply };
     } catch (error) {
-      console.error('Error sending message to Gemini:', error);
+      console.error('Error sending message to chat service:', error);
       throw error;
     }
   }
 
   static async getSystemStatus() {
     try {
-      // Check if API key is available
-      const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
-      if (!apiKey) {
-        console.warn('Gemini API key not found in environment variables');
-        return false;
-      }
-      
-      // Try to initialize the service as a basic connectivity test
-      const testService = new GeminiService(apiKey);
-      const responseText = await testService.sendMessage("Hello");
-      
-      return !!responseText;
+      const response = await fetch(CHAT_PROXY_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message: 'Hello' }),
+      });
+
+      if (!response.ok) return false;
+
+      const data = await response.json();
+      return typeof data.reply === 'string' && data.reply.length > 0;
     } catch (error) {
-      console.error('Error checking Gemini system status:', error);
+      console.error('Error checking chat system status:', error);
       return false;
     }
   }
