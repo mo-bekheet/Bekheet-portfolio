@@ -15,6 +15,7 @@ import {
 } from '@mui/material';
 import { buildDraft, draftToValues, findMissingRequired } from './formUtils.js';
 import ImageField from './ImageField.jsx';
+import { sanitizeError } from '../../../lib/errorSanitizer.js';
 
 export default function CrudFormDialog({
   open,
@@ -44,7 +45,8 @@ export default function CrudFormDialog({
     await onSubmit(draftToValues(fields, draft));
   };
 
-  const error = validationError || serverError;
+  const rawError = validationError || serverError;
+  const error = rawError ? sanitizeError(rawError) : null;
 
   return (
     <Dialog open={open} onClose={onClose} maxWidth="md" fullWidth>
@@ -52,7 +54,7 @@ export default function CrudFormDialog({
         <DialogTitle>{title}</DialogTitle>
         <DialogContent>
           <Stack spacing={2.5} sx={{ pt: 1 }}>
-            {error && <Alert severity="error">{String(error)}</Alert>}
+            {error && <Alert severity="error">{error}</Alert>}
             {fields.map((field) => {
               if (field.type === 'switch') {
                 return (

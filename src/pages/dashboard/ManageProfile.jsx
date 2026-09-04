@@ -15,6 +15,7 @@ import SaveIcon from '@mui/icons-material/Save';
 import { profileApi } from '../../lib/api.js';
 import useAppStore from '../../store/useAppStore.js';
 import ImageField from './components/ImageField.jsx';
+import { sanitizeError } from '../../lib/errorSanitizer.js';
 
 const EMPTY = {
   full_name: '',
@@ -79,7 +80,7 @@ export default function ManageProfile() {
         setValues(row ? { ...EMPTY, ...row } : EMPTY);
         setLoadError(null);
       })
-      .catch((err) => mounted && setLoadError(err))
+      .catch((err) => mounted && setLoadError(sanitizeError(err)))
       .finally(() => mounted && setLoading(false));
     return () => {
       mounted = false;
@@ -104,7 +105,7 @@ export default function ManageProfile() {
       setUserProfile(saved);
       setSnackbar({ message: 'Profile saved', severity: 'success' });
     } catch (err) {
-      setSaveError(err.message || String(err));
+      setSaveError(sanitizeError(err));
     } finally {
       setSaving(false);
     }
@@ -130,7 +131,7 @@ export default function ManageProfile() {
       </Box>
 
       {loadError && (
-        <Alert severity="error">Could not load profile: {String(loadError.message || loadError)}</Alert>
+        <Alert severity="error">Could not load profile: {loadError}</Alert>
       )}
       {saveError && <Alert severity="error">{saveError}</Alert>}
 

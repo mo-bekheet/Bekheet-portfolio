@@ -25,6 +25,7 @@ import MarkunreadIcon from '@mui/icons-material/Markunread';
 import ReplyIcon from '@mui/icons-material/Reply';
 import RefreshIcon from '@mui/icons-material/Refresh';
 import { messagesApi } from '../../lib/api';
+import { sanitizeError } from '../../lib/errorSanitizer.js';
 
 const formatDate = (iso) =>
   new Date(iso).toLocaleString(undefined, {
@@ -47,7 +48,7 @@ export default function ManageMessages() {
       setMessages(data ?? []);
       setError(null);
     } catch (err) {
-      setError(err.message || String(err));
+      setError(sanitizeError(err));
     } finally {
       setLoading(false);
     }
@@ -71,7 +72,7 @@ export default function ManageMessages() {
       try {
         await messagesApi.markRead(message.id, true);
       } catch (err) {
-        setSnackbar({ message: err.message || String(err), severity: 'error' });
+        setSnackbar({ message: sanitizeError(err), severity: 'error' });
         reload();
       }
     }
@@ -85,7 +86,7 @@ export default function ManageMessages() {
     try {
       await messagesApi.markRead(message.id, nextRead);
     } catch (err) {
-      setSnackbar({ message: err.message || String(err), severity: 'error' });
+      setSnackbar({ message: sanitizeError(err), severity: 'error' });
       reload();
     }
   };
@@ -99,7 +100,7 @@ export default function ManageMessages() {
       setMessages((prev) => prev.filter((m) => m.id !== message.id));
       setSnackbar({ message: 'Message deleted', severity: 'success' });
     } catch (err) {
-      setSnackbar({ message: err.message || String(err), severity: 'error' });
+      setSnackbar({ message: sanitizeError(err), severity: 'error' });
     }
   };
 
@@ -125,7 +126,7 @@ export default function ManageMessages() {
 
       {error && (
         <Alert severity="warning">
-          Could not load messages: {error}
+          Could not load messages: {sanitizeError(error)}
         </Alert>
       )}
 
