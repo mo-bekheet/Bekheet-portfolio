@@ -35,4 +35,20 @@ export default [
       ],
     },
   },
+  {
+    files: ['netlify/functions/**/*.js', 'scripts/**/*.js'],
+    languageOptions: {
+      ecmaVersion: 2020,
+      globals: { ...globals.node, ...globals.es2020 },
+      sourceType: 'commonjs',
+    },
+    plugins: {
+      react,
+      'react-hooks': reactHooks,
+    },
+    rules: {
+      ...js.configs.recommended.rules,
+      'no-undef': 'off',
+    },
+  },
 ]
