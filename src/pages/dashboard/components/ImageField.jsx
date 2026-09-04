@@ -1,7 +1,6 @@
 import { useRef, useState } from 'react';
 import { Box, Button, CircularProgress, InputAdornment, Stack, TextField } from '@mui/material';
 import UploadIcon from '@mui/icons-material/Upload';
-import { supabase, isSupabaseConfigured } from '../../../lib/supabase.js';
 
 export default function ImageField({ label, value, onChange, folder = 'misc', accept = 'image/*' }) {
   const inputRef = useRef(null);
@@ -15,22 +14,42 @@ export default function ImageField({ label, value, onChange, folder = 'misc', ac
     const file = event.target.files?.[0];
     event.target.value = '';
     if (!file) return;
-    if (!isSupabaseConfigured) {
-      setError('Supabase is not configured.');
+
+    const allowedTypes = ['image/jpeg', 'image/png', 'image/webp', 'application/pdf'];
+    if (!allowedTypes.includes(file.type)) {
+      setError('File type not allowed. Use JPEG, PNG, WebP, or PDF.');
       return;
     }
+
+    const maxSize = 10 * 1024 * 1024;
+    if (file.size > maxSize) {
+      setError('File too large. Maximum size is 10MB.');
+      return;
+    }
+
     setUploading(true);
     setError(null);
     try {
-      const safeName = file.name.replace(/[^a-zA-Z0-9._-]/g, '_');
-      const path = `${folder}/${Date.now()}-${safeName}`;
-      const { error: uploadError } = await supabase.storage.from('media').upload(path, file, {
-        cacheControl: '3600',
-        upsert: false
+      const base64 = await new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => resolve(reader.result.split(',')[1]);
+        reader.onerror = reject;
+        reader.readAsDataURL(file);
       });
-      if (uploadError) throw uploadError;
-      const { data } = supabase.storage.from('media').getPublicUrl(path);
-      onChange(data.publicUrl);
+
+      const response = await fetch('/.netlify/functions/upload-media', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ fileBase64: base64, filename: file.name, folder }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Upload failed');
+      }
+
+      onChange(data.url);
     } catch (err) {
       setError(err.message || String(err));
     } finally {
