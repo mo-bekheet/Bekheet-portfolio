@@ -2,12 +2,35 @@ import React, { useState, useEffect } from 'react';
 import { Container, Row, Col, Card } from 'react-bootstrap';
 import { motion } from 'framer-motion';
 import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
+import rehypeSanitize from 'rehype-sanitize';
 import './Blog.css';
 import { samplePosts } from '../content/index.js';
 import { postsApi } from '../lib/api';
 
 const formatDate = (value) =>
   new Date(value).toLocaleDateString('en-US', { year: 'numeric', month: 'long' });
+
+const sanitizeSchema = {
+  tagNames: [
+    'h1', 'h2', 'h3', 'h4', 'h5', 'h6',
+    'p', 'br', 'hr',
+    'strong', 'em', 'del', 'code', 'pre',
+    'a', 'blockquote',
+    'ul', 'ol', 'li',
+    'img', 'table', 'thead', 'tbody', 'tr', 'th', 'td',
+  ],
+  attributes: {
+    a: ['href', 'title', 'target', 'rel'],
+    img: ['src', 'alt', 'title', 'width', 'height'],
+    '*': ['className', 'id'],
+  },
+  clobberPrefix: 'user-content-',
+  allowedSchemes: ['http', 'https', 'mailto'],
+  requiredAttributes: {
+    a: { rel: 'noopener noreferrer', target: '_blank' },
+  },
+};
 
 const Blog = () => {
   const [posts, setPosts] = useState([]);
@@ -73,7 +96,13 @@ const Blog = () => {
                   <h3 style={{ color: 'var(--color-text-primary)' }}>{post.title}</h3>
                   <hr style={{ borderColor: 'var(--color-bg-glass-border)' }} />
                   <div className="blog-content" style={{ color: 'var(--color-text-secondary)' }}>
-                    <ReactMarkdown>{post.content}</ReactMarkdown>
+                    <ReactMarkdown
+                      remarkPlugins={[remarkGfm]}
+                      rehypePlugins={[[rehypeSanitize, sanitizeSchema]]}
+                      allowDangerousHtml={false}
+                    >
+                      {post.content}
+                    </ReactMarkdown>
                   </div>
                 </Card>
               </motion.div>

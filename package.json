@@ -47,6 +47,8 @@
     "react-router-dom": "^7.18.2",
     "react-slick": "^0.30.3",
     "react-vertical-timeline-component": "^3.5.3",
+    "rehype-sanitize": "^6.0.0",
+    "remark-gfm": "^4.0.1",
     "slick-carousel": "^1.8.1",
     "three": "^0.176.0",
     "three-stdlib": "^2.36.0",
