@@ -51,10 +51,17 @@ ML & CV: PyTorch, YOLO, OpenCV, OCR, NLP, scikit-learn. Primary language: Python
 
 Answer questions about Mohamed accurately based only on this information. Be concise, professional, and friendly. If asked something you do not know, say so and point visitors to the contact information above.`;
 
-const SAFETY_SETTINGS = [
-  { category: 'HARM_CATEGORY_HARASSMENT', threshold: 'BLOCK_MEDIUM_AND_ABOVE' },
-  { category: 'HARM_CATEGORY_HATE_SPEECH', threshold: 'BLOCK_LOW_AND_ABOVE' },
-];
+const ALLOWED_ORIGINS = ['https://bekheet.com', 'https://www.bekheet.com', 'http://localhost:5173', 'http://localhost:3000'];
+
+function getCorsHeaders(origin) {
+  const allowOrigin = ALLOWED_ORIGINS.includes(origin) ? origin : ALLOWED_ORIGINS[0];
+  return {
+    'Access-Control-Allow-Origin': allowOrigin,
+    'Access-Control-Allow-Methods': 'POST, OPTIONS',
+    'Access-Control-Allow-Headers': 'Content-Type',
+    'Vary': 'Origin',
+  };
+}
 
 const MAX_MESSAGE_LENGTH = 2000;
 const RATE_LIMIT_WINDOW_MS = 60 * 1000;
@@ -80,21 +87,20 @@ function isRateLimited(ip) {
 }
 
 exports.handler = async function (event) {
+  const origin = event.headers.origin || event.headers.Origin || '';
+  const corsHeaders = getCorsHeaders(origin);
+
   if (event.httpMethod === 'OPTIONS') {
     return {
       statusCode: 204,
-      headers: {
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Methods': 'POST, OPTIONS',
-        'Access-Control-Allow-Headers': 'Content-Type',
-      },
+      headers: corsHeaders,
     };
   }
 
   if (event.httpMethod !== 'POST') {
     return {
       statusCode: 405,
-      headers: { 'Access-Control-Allow-Origin': '*' },
+      headers: corsHeaders,
       body: JSON.stringify({ error: 'Method not allowed' }),
     };
   }
@@ -108,7 +114,7 @@ exports.handler = async function (event) {
   if (isRateLimited(ip)) {
     return {
       statusCode: 429,
-      headers: { 'Access-Control-Allow-Origin': '*', 'Retry-After': '60' },
+      headers: { ...corsHeaders, 'Retry-After': '60' },
       body: JSON.stringify({ error: 'Too many requests. Please try again later.' }),
     };
   }
@@ -117,7 +123,7 @@ exports.handler = async function (event) {
     console.error('GEMINI_API_KEY is not configured');
     return {
       statusCode: 500,
-      headers: { 'Access-Control-Allow-Origin': '*' },
+      headers: corsHeaders,
       body: JSON.stringify({ error: 'Chat service is not configured' }),
     };
   }
@@ -128,7 +134,7 @@ exports.handler = async function (event) {
   } catch {
     return {
       statusCode: 400,
-      headers: { 'Access-Control-Allow-Origin': '*' },
+      headers: corsHeaders,
       body: JSON.stringify({ error: 'Invalid JSON body' }),
     };
   }
@@ -136,7 +142,7 @@ exports.handler = async function (event) {
   if (typeof message !== 'string' || !message.trim() || message.length > MAX_MESSAGE_LENGTH) {
     return {
       statusCode: 400,
-      headers: { 'Access-Control-Allow-Origin': '*' },
+      headers: corsHeaders,
       body: JSON.stringify({ error: `Message must be a non-empty string of at most ${MAX_MESSAGE_LENGTH} characters` }),
     };
   }
@@ -158,7 +164,7 @@ exports.handler = async function (event) {
       console.error('Gemini API error:', response.status);
       return {
         statusCode: 502,
-        headers: { 'Access-Control-Allow-Origin': '*' },
+        headers: corsHeaders,
         body: JSON.stringify({ error: 'Failed to communicate with AI service' }),
       };
     }
@@ -173,7 +179,7 @@ exports.handler = async function (event) {
       statusCode: 200,
       headers: {
         'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*',
+        ...corsHeaders,
         'Cache-Control': 'no-store',
       },
       body: JSON.stringify({ reply }),
@@ -182,7 +188,7 @@ exports.handler = async function (event) {
     console.error('Chat proxy error:', error.message);
     return {
       statusCode: 500,
-      headers: { 'Access-Control-Allow-Origin': '*' },
+      headers: corsHeaders,
       body: JSON.stringify({ error: 'Failed to communicate with AI service' }),
     };
   }
