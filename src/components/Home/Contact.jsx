@@ -1,12 +1,11 @@
 import React, { Suspense, lazy, useMemo, useRef, useState } from "react";
 import { motion } from "framer-motion";
-import emailjs from "@emailjs/browser";
 import { messagesApi } from "../../lib/api.js";
 import { SectionWrapper } from "../hoc";
 import { slideIn } from "../utils/motion";
 import { Container, Row, Col } from "react-bootstrap";
 import "./style.css";
-import '@fortawesome/fontawesome-free/css/all.min.css'; // Import Font Awesome CSS
+import '@fortawesome/fontawesome-free/css/all.min.css';
 
 const EarthCanvas = lazy(() => import("./canvas/Earth.jsx"));
 
@@ -38,50 +37,54 @@ const Contact = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
 
-    const sendEmail = emailjs.send(
-      'service_e5ycsfe',
-      'template_x0cxs2o',
-      {
-        from_name: form.name,
-        to_name: "Mohamed Bekheet",
-        from_email: form.email,
-        to_email: "mohamedbekheet33@gmail.com",
-        message: form.message,
-      },
-      'US2HFHJEPrK2NEtJ2',
-    );
-
-    const saveToInbox = messagesApi
-      .create({ name: form.name, email: form.email, message: form.message })
-      .catch((err) => {
-        console.warn("Message saved to inbox failed:", err);
+    try {
+      const sendEmailRes = await fetch('/.netlify/functions/send-email', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: form.name,
+          email: form.email,
+          message: form.message,
+        }),
       });
 
-    Promise.allSettled([sendEmail, saveToInbox]).then(
-      ([emailResult, inboxResult]) => {
-        setLoading(false);
+      const saveToInbox = messagesApi
+        .create({ name: form.name, email: form.email, message: form.message })
+        .catch((err) => {
+          console.warn("Message saved to inbox failed:", err);
+        });
 
-        if (
-          emailResult.status === "fulfilled" ||
-          inboxResult.status === "fulfilled"
-        ) {
-          alert("Thank you. I will get back to you as soon as possible.");
+    const [emailResult, inboxResult] = await Promise.allSettled([
+      sendEmailRes.json(),
+      saveToInbox,
+    ]);
 
-          setForm({
-            name: "",
-            email: "",
-            message: "",
-          });
-        } else {
-          console.error(emailResult.reason);
-          alert("Ahh, something went wrong. Please try again.");
-        }
+      setLoading(false);
+
+      if (
+        (emailResult.status === "fulfilled" && emailResult.value.success) ||
+        inboxResult.status === "fulfilled"
+      ) {
+        alert("Thank you. I will get back to you as soon as possible.");
+
+        setForm({
+          name: "",
+          email: "",
+          message: "",
+        });
+      } else {
+        console.error(emailResult.reason);
+        alert("Ahh, something went wrong. Please try again.");
       }
-    );
+    } catch (error) {
+      setLoading(false);
+      console.error(error);
+      alert("Ahh, something went wrong. Please try again.");
+    }
   };
 
 
