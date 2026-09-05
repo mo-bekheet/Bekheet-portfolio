@@ -7,6 +7,7 @@ import rehypeSanitize from 'rehype-sanitize';
 import './Blog.css';
 import { samplePosts } from '../content/index.js';
 import { postsApi } from '../lib/api';
+import { SEO } from '../components/SEO';
 
 const formatDate = (value) =>
   new Date(value).toLocaleDateString('en-US', { year: 'numeric', month: 'long' });
@@ -65,6 +66,12 @@ const Blog = () => {
   }, []);
 
   return (
+    <>
+      <SEO
+        title="Tech Blog | GenAI, Computer Vision & Software Engineering | Mohamed Bekheet"
+        description="Thoughts, tutorials, and insights on Generative AI, Computer Vision, MLOps, and Software Engineering by Mohamed Bekheet."
+        canonical="https://bekheet.com/blog"
+      />
     <Container fluid className="blog-section section-padding py-5 min-vh-100" style={{paddingTop: '120px'}}>
       <Container>
         <motion.div
@@ -72,9 +79,9 @@ const Blog = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
-          <h2 className="project-heading mb-5">
+          <h1 className="project-heading mb-5">
             My <strong className="purple">Tech Blog</strong>
-          </h2>
+          </h1>
           <p className="text-secondary mb-5" style={{ color: 'var(--color-text-secondary)' }}>
             Thoughts, tutorials, and insights regarding GenAI, Computer Vision, and Software Engineering.
           </p>
@@ -111,6 +118,7 @@ const Blog = () => {
         </Row>
       </Container>
     </Container>
+  </>
   );
 };
 

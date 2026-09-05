@@ -6,19 +6,19 @@ import { SiKaggle } from 'react-icons/si';
 
 const SocialLinks = () => (
   <div className="social-icons">
-    <a href="https://chatwith.io/s/mohamed-bekheet" target="_blank" rel="noopener noreferrer" className="icon-circle">
+    <a href="https://chatwith.io/s/mohamed-bekheet" target="_blank" rel="noopener noreferrer" className="icon-circle" aria-label="Chat on WhatsApp">
       <FaWhatsapp />
     </a>
-    <a href="https://github.bekheet.com" target="_blank" rel="noopener noreferrer" className="icon-circle">
+    <a href="https://github.bekheet.com" target="_blank" rel="noopener noreferrer" className="icon-circle" aria-label="Follow on GitHub">
       <AiOutlineGithub />
     </a>
-    <a href="https://linkedin.bekheet.com" target="_blank" rel="noopener noreferrer" className="icon-circle">
+    <a href="https://linkedin.bekheet.com" target="_blank" rel="noopener noreferrer" className="icon-circle" aria-label="Connect on LinkedIn">
       <ImLinkedin />
     </a>
-    <a href="https://kaggle.bekheet.com" target="_blank" rel="noopener noreferrer" className="icon-circle">
+    <a href="https://kaggle.bekheet.com" target="_blank" rel="noopener noreferrer" className="icon-circle" aria-label="Follow on Kaggle">
       <SiKaggle />
     </a>
-    <a href="https://dev.to/mohamed-bekheet" target="_blank" rel="noopener noreferrer" className="icon-circle">
+    <a href="https://dev.to/mohamed-bekheet" target="_blank" rel="noopener noreferrer" className="icon-circle" aria-label="Read articles on Dev.to">
       <FaDev />
     </a>
   </div>
@@ -37,16 +37,6 @@ const Footer = () => {
             </a>
           </p>
           <SocialLinks />
-          <p className="footer-stats">
-            Visitors: {' '}
-            <img
-              className="visitcounter"
-              src="https://hitwebcounter.com/counter/counter.php?page=18600318&style=0025&nbdigits=5&type=page&initCount=459"
-              title="Visit Counter"
-              alt="Visit counter"
-              border="0"
-            />
-          </p>
         </div>
       </Container>
     </footer>

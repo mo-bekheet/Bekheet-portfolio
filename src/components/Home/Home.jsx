@@ -15,6 +15,7 @@ import Tilt from "react-parallax-tilt";
 import "./style.css";
 import { useSiteProfile } from "../../hooks/useSiteProfile.js";
 import { getImageUrl, getPictureSources } from "../../lib/imageUtils.js";
+import { SEO } from "../SEO";
 
 function Home() {
   const profile = useSiteProfile();
@@ -28,7 +29,13 @@ function Home() {
   ].filter((link) => link.url);
 
   return (
-    <section>
+    <>
+      <SEO
+        title="Mohamed Bekheet | Machine Learning Engineer, Computer Vision & Generative AI"
+        description="Production-grade AI systems across Computer Vision, OCR, Generative AI and MLOps, built on AWS Bedrock and SageMaker."
+        canonical="https://bekheet.com/"
+      />
+      <section>
       <Container fluid className="home-section" id="home">
         {/* <Particle /> */}
         <Container className="home-content">
@@ -102,6 +109,7 @@ function Home() {
 
     
     </section>
+  </>
   );
 }
 

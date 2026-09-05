@@ -6,6 +6,7 @@ import { AiOutlineDownload } from "react-icons/ai";
 import resumeImage from "../../assets/Mohamed-Bekheet_page-0001.jpg";
 import Particle from "../Particle.jsx";
 import { useSiteProfile } from "../../hooks/useSiteProfile.js";
+import { SEO } from "../SEO";
 
 function ResumeNew() {
   const [width, setWidth] = useState(1200);
@@ -18,13 +19,19 @@ function ResumeNew() {
   }, []);
 
   return (
-    <div>
-      <Container fluid className="resume-section">
+    <>
+      <SEO
+        title="Mohamed Bekheet Resume | Machine Learning Engineer"
+        description="Download the full CV of Mohamed Bekheet, Machine Learning Engineer specializing in Computer Vision, Generative AI, and MLOps."
+        canonical="https://bekheet.com/resume"
+      />
+      <div>
+        <Container fluid className="resume-section">
         <Particle />
         <Row style={{ justifyContent: "center", position: "relative", marginBottom: "30px" }}>
-          <h2 className="project-heading">
+          <h1 className="project-heading">
             My <strong className="purple">Resume</strong>
-          </h2>
+          </h1>
         </Row>
         
         <Row style={{ justifyContent: "center", position: "relative", marginBottom: "30px" }}>
@@ -60,6 +67,7 @@ function ResumeNew() {
         </Row>
       </Container>
     </div>
+  </>
   );
 }
 

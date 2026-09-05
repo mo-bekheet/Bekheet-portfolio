@@ -5,18 +5,25 @@ import ProjectCard from "./ProjectCards";
 
 import { projectData } from "./projectsData";
 import { useContent } from "../../hooks/useContent";
+import { SEO } from "../SEO";
 
 const staticByTitle = Object.fromEntries(projectData.map((p) => [p.title, p]));
 
 function Projects() {
   const { content } = useContent("projects");
   return (
-    <Container fluid className="project-section">
-      {/* <Particle /> */}
-      <Container>
-        <h2 className="project-heading">
+    <>
+      <SEO
+        title="Machine Learning & Computer Vision Projects | Mohamed Bekheet"
+        description="Explore featured projects in Computer Vision, OCR, Generative AI, and MLOps. CopticTrans, CardioAI, and more."
+        canonical="https://bekheet.com/project"
+      />
+      <Container fluid className="project-section">
+        {/* <Particle /> */}
+        <Container>
+        <h1 className="project-heading">
           Featured <strong className="purple">Projects </strong>
-        </h2>
+        </h1>
         <p style={{ color: "white" }}>
           Here are selected projects showcasing my expertise and experience.
         </p>
@@ -39,6 +46,7 @@ function Projects() {
         </Row>
       </Container>
     </Container>
+  </>
   );
 }
 

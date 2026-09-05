@@ -2,6 +2,7 @@ import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import { Fade } from "react-awesome-reveal";
 import { useContent } from "../../hooks/useContent.js";
+import { SEO } from "../SEO";
 
 const toCard = (cert) => ({
   key: cert.id ?? cert.title,
@@ -17,12 +18,18 @@ export default function ProjectPage() {
   const cards = (content ?? []).map(toCard);
 
   return (
-    <section>
-      <Container fluid className="project-section">
+    <>
+      <SEO
+        title="AI & Machine Learning Certifications | Mohamed Bekheet"
+        description="13 cloud & AI certifications across AWS, Azure, and GCP. AWS ML Specialty, Solutions Architect, Generative AI, and more."
+        canonical="https://bekheet.com/certificate"
+      />
+      <section>
+        <Container fluid className="project-section">
         <Container>
-          <h2 className="project-heading">
+          <h1 className="project-heading">
             Professional <strong className="purple">Certifications</strong>
-          </h2>
+          </h1>
           <p style={{ color: "white" }}>
             Industry-recognized credentials demonstrating my expertise.
           </p>
@@ -73,5 +80,6 @@ export default function ProjectPage() {
         </Container>
       </Container>
     </section>
+  </>
   );
 }

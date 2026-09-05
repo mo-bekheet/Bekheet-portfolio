@@ -45,6 +45,23 @@ const Testimonials = () => {
       delay: t.delay ?? fallback.delay
     };
   });
+
+  const handleSliderInit = (slider) => {
+    // Add aria-hidden to cloned slides for accessibility
+    const track = slider.list;
+    if (track) {
+      const clones = track.querySelectorAll('.slick-cloned');
+      clones.forEach((clone) => {
+        clone.setAttribute('aria-hidden', 'true');
+        // Also hide images in clones
+        clone.querySelectorAll('img').forEach((img) => {
+          img.setAttribute('alt', '');
+          img.setAttribute('aria-hidden', 'true');
+        });
+      });
+    }
+  };
+
   const sliderSettings = {
     dots: true,
     infinite: true,
@@ -94,7 +111,7 @@ const Testimonials = () => {
             </div>
           </div>
           <div className="col-lg-6 wow fadeInUp" data-wow-delay="0.3s">
-            <Slider {...sliderSettings} key={testimonials.length}>
+            <Slider {...sliderSettings} key={testimonials.length} onInit={handleSliderInit}>
               {testimonials.map((testimonial) => (
                 <div
                   key={testimonial.id}
@@ -107,7 +124,7 @@ const Testimonials = () => {
                       className="img-fluid rounded-circle border border-secondary p-2 mx-auto"
                       src={testimonial.imgSrc}
                       style={imgStyle}
-                      alt=""
+                      alt={`${testimonial.clientName}`}
                     />
                     </a>
                     <div className="testimonial-icon">

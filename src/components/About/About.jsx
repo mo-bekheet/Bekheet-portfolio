@@ -9,12 +9,19 @@ import Education from "./education.jsx";
 import ExperienceJourney from "./experience.jsx";
 import Skills from "./skills.jsx";
 import { programmingLanguages, programmingLanguageImages, frameworksAndLibraries, frameworksAndLibrariesImages, tools, toolImages } from "./skillsContent";
+import { SEO } from "../SEO";
 
 function About() {
   return (
-    <Container fluid className="about-section">
-      {/* <Particle /> */}
-      <Container>
+    <>
+      <SEO
+        title="About Mohamed Bekheet | ML Engineer, AWS Bedrock & SageMaker"
+        description="Machine Learning Engineer specializing in Computer Vision, Generative AI, and MLOps. 13 cloud & AI certifications across AWS, Azure, and GCP."
+        canonical="https://bekheet.com/about"
+      />
+      <Container fluid className="about-section">
+        {/* <Particle /> */}
+        <Container>
         <Row style={{ justifyContent: "center", padding: "10px" }}>
           <Col
             md={7}
@@ -24,9 +31,9 @@ function About() {
               paddingBottom: "50px",
             }}
           >
-            <h2 style={{ fontSize: "2.1em", paddingBottom: "20px" }}>
+            <h1 style={{ fontSize: "2.1em", paddingBottom: "20px" }}>
               About <strong className="purple">Me</strong>
-            </h2>
+            </h1>
             <Aboutcard />
           </Col>
           <Col
@@ -60,6 +67,7 @@ function About() {
         <Github />
       </Container>
     </Container>
+  </>
   );
 }
 
