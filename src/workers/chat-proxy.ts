@@ -1,4 +1,9 @@
-const fetch = require('node-fetch');
+import { Hono } from 'hono';
+import { cors } from 'hono/cors';
+
+type Env = {
+  GEMINI_API_KEY: string;
+};
 
 const GEMINI_MODEL = 'gemini-1.5-flash';
 const GEMINI_API_URL = `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent`;
@@ -51,24 +56,19 @@ ML & CV: PyTorch, YOLO, OpenCV, OCR, NLP, scikit-learn. Primary language: Python
 
 Answer questions about Mohamed accurately based only on this information. Be concise, professional, and friendly. If asked something you do not know, say so and point visitors to the contact information above.`;
 
-const ALLOWED_ORIGINS = ['https://bekheet.com', 'https://www.bekheet.com', 'http://localhost:5173', 'http://localhost:3000'];
+const SAFETY_SETTINGS = [
+  { category: 'HARM_CATEGORY_HARASSMENT', threshold: 'BLOCK_MEDIUM_AND_ABOVE' },
+  { category: 'HARM_CATEGORY_HATE_SPEECH', threshold: 'BLOCK_LOW_AND_ABOVE' },
+];
 
-function getCorsHeaders(origin) {
-  const allowOrigin = ALLOWED_ORIGINS.includes(origin) ? origin : ALLOWED_ORIGINS[0];
-  return {
-    'Access-Control-Allow-Origin': allowOrigin,
-    'Access-Control-Allow-Methods': 'POST, OPTIONS',
-    'Access-Control-Allow-Headers': 'Content-Type',
-    'Vary': 'Origin',
-  };
-}
+const ALLOWED_ORIGINS = ['https://bekheet.com', 'https://www.bekheet.com', 'http://localhost:5173', 'http://localhost:3000'];
 
 const MAX_MESSAGE_LENGTH = 2000;
 const RATE_LIMIT_WINDOW_MS = 60 * 1000;
 const RATE_LIMIT_MAX_REQUESTS = 20;
-const requestCounts = new Map();
+const requestCounts = new Map<string, { count: number; resetAt: number }>();
 
-function isRateLimited(ip) {
+function isRateLimited(ip: string): boolean {
   const now = Date.now();
   const entry = requestCounts.get(ip);
 
@@ -86,69 +86,65 @@ function isRateLimited(ip) {
   return entry.count > RATE_LIMIT_MAX_REQUESTS;
 }
 
-exports.handler = async function (event) {
-  const origin = event.headers.origin || event.headers.Origin || '';
+function getClientIp(request: Request): string {
+  return request.headers.get('cf-connecting-ip') ||
+         request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ||
+         'unknown';
+}
+
+function getCorsHeaders(origin: string) {
+  const allowOrigin = ALLOWED_ORIGINS.includes(origin) ? origin : ALLOWED_ORIGINS[0];
+  return {
+    'Access-Control-Allow-Origin': allowOrigin,
+    'Access-Control-Allow-Methods': 'POST, OPTIONS',
+    'Access-Control-Allow-Headers': 'Content-Type',
+    'Vary': 'Origin',
+  };
+}
+
+const app = new Hono<{ Bindings: Env }>();
+
+app.use('/chat*', cors({
+  origin: ALLOWED_ORIGINS,
+  allowMethods: ['POST', 'OPTIONS'],
+  allowHeaders: ['Content-Type'],
+  maxAge: 86400,
+}));
+
+app.post('/chat', async (c) => {
+  const origin = c.req.header('origin') || '';
   const corsHeaders = getCorsHeaders(origin);
 
-  if (event.httpMethod === 'OPTIONS') {
-    return {
-      statusCode: 204,
-      headers: corsHeaders,
-    };
-  }
-
-  if (event.httpMethod !== 'POST') {
-    return {
-      statusCode: 405,
-      headers: corsHeaders,
-      body: JSON.stringify({ error: 'Method not allowed' }),
-    };
-  }
-
-  const ip =
-    event.headers['x-nf-client-connection-ip'] ||
-    event.headers['client-ip'] ||
-    event.headers['x-forwarded-for'] ||
-    'unknown';
+  const ip = getClientIp(c.req.raw);
 
   if (isRateLimited(ip)) {
-    return {
-      statusCode: 429,
-      headers: { ...corsHeaders, 'Retry-After': '60' },
-      body: JSON.stringify({ error: 'Too many requests. Please try again later.' }),
-    };
+    return c.json({ error: 'Too many requests. Please try again later.' }, 429, {
+      ...corsHeaders,
+      'Retry-After': '60',
+    });
   }
 
-  if (!process.env.GEMINI_API_KEY) {
+  const { GEMINI_API_KEY } = c.env;
+
+  if (!GEMINI_API_KEY) {
     console.error('GEMINI_API_KEY is not configured');
-    return {
-      statusCode: 500,
-      headers: corsHeaders,
-      body: JSON.stringify({ error: 'Chat service is not configured' }),
-    };
+    return c.json({ error: 'Chat service is not configured' }, 500, corsHeaders);
   }
 
-  let message;
+  let message: string;
   try {
-    ({ message } = JSON.parse(event.body));
+    const body = await c.req.json();
+    message = body.message;
   } catch {
-    return {
-      statusCode: 400,
-      headers: corsHeaders,
-      body: JSON.stringify({ error: 'Invalid JSON body' }),
-    };
+    return c.json({ error: 'Invalid JSON body' }, 400, corsHeaders);
   }
 
   if (typeof message !== 'string' || !message.trim() || message.length > MAX_MESSAGE_LENGTH) {
-    return {
-      statusCode: 400,
-      headers: corsHeaders,
-      body: JSON.stringify({ error: `Message must be a non-empty string of at most ${MAX_MESSAGE_LENGTH} characters` }),
-    };
+    return c.json({ error: `Message must be a non-empty string of at most ${MAX_MESSAGE_LENGTH} characters` }, 400, corsHeaders);
   }
 
   try {
-    const response = await fetch(`${GEMINI_API_URL}?key=${process.env.GEMINI_API_KEY}`, {
+    const response = await fetch(`${GEMINI_API_URL}?key=${GEMINI_API_KEY}`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -158,15 +154,17 @@ exports.handler = async function (event) {
       }),
     });
 
-    const data = await response.json();
+    const data = await response.json<{
+      candidates?: Array<{
+        content?: {
+          parts?: Array<{ text?: string }>;
+        };
+      }>;
+    }>();
 
     if (!response.ok) {
       console.error('Gemini API error:', response.status);
-      return {
-        statusCode: 502,
-        headers: corsHeaders,
-        body: JSON.stringify({ error: 'Failed to communicate with AI service' }),
-      };
+      return c.json({ error: 'Failed to communicate with AI service' }, 502, corsHeaders);
     }
 
     const reply =
@@ -175,21 +173,14 @@ exports.handler = async function (event) {
         .filter(Boolean)
         .join('') || '';
 
-    return {
-      statusCode: 200,
-      headers: {
-        'Content-Type': 'application/json',
-        ...corsHeaders,
-        'Cache-Control': 'no-store',
-      },
-      body: JSON.stringify({ reply }),
-    };
+    return c.json({ reply }, 200, {
+      ...corsHeaders,
+      'Cache-Control': 'no-store',
+    });
   } catch (error) {
-    console.error('Chat proxy error:', error.message);
-    return {
-      statusCode: 500,
-      headers: corsHeaders,
-      body: JSON.stringify({ error: 'Failed to communicate with AI service' }),
-    };
+    console.error('Chat proxy error:', error);
+    return c.json({ error: 'Failed to communicate with AI service' }, 500, corsHeaders);
   }
-};
+});
+
+export default app;

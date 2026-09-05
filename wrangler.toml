@@ -1,0 +1,36 @@
+name = "bekheet-portfolio"
+main = "src/workers/index.ts"
+compatibility_date = "2024-09-01"
+compatibility_flags = ["nodejs_compat", "nodejs_compat_populate_global_scope"]
+
+[build]
+command = "npm run build"
+watch_dir = "src"
+
+[assets]
+directory = "dist"
+binding = "ASSETS"
+not_found_handling = "single-page-application"
+html_handling = "auto-trailing-slash"
+
+[[r2_buckets]]
+binding = "MEDIA_BUCKET"
+bucket_name = "bekheet-portfolio-media"
+preview_bucket_name = "bekheet-portfolio-media-preview"
+
+[[kv_namespaces]]
+binding = "CSP_REPORTS"
+id = "csp-reports-prod"
+preview_id = "csp-reports-preview"
+
+[vars]
+NODE_ENV = "production"
+
+[dev]
+port = 8788
+local_protocol = "http"
+ip = "127.0.0.1"
+
+[observability]
+enabled = true
+head_sampling_rate = 0.1
