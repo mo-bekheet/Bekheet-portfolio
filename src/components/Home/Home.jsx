@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import homeLogo from "../../assets/home-main.webp";
 // import Particle from "../Particle";
@@ -14,6 +14,7 @@ import { SiKaggle } from 'react-icons/si';
 import Tilt from "react-parallax-tilt";
 import "./style.css";
 import { useSiteProfile } from "../../hooks/useSiteProfile.js";
+import { getImageUrl, getPictureSources } from "../../lib/imageUtils.js";
 
 function Home() {
   const profile = useSiteProfile();
@@ -66,12 +67,30 @@ function Home() {
 
             <Col md={5} style={{ paddingBottom: 20 }}>
             <Tilt>
-              <img
-                src={profile.hero_image_url || homeLogo}
-                alt="home pic"
-                className="img-fluid"
-                style={{ maxHeight: "800px" }}
-              />
+              {(() => {
+                const heroPath = profile.hero_image_url || homeLogo;
+                const { sources, fallback } = getPictureSources(heroPath, {
+                  widths: [400, 800, 1200, 1600],
+                  formats: ['avif', 'webp'],
+                });
+                return (
+                  <picture>
+                    {sources.map((source, idx) => (
+                      <source key={idx} type={source.type} srcSet={source.srcSet} />
+                    ))}
+                    <img
+                      src={fallback}
+                      alt={`${profile.full_name || "Mohamed Bekheet"} - Machine Learning Engineer`}
+                      className="img-fluid"
+                      style={{ maxHeight: "800px" }}
+                      width={600}
+                      height={800}
+                      loading="eager"
+                      fetchPriority="high"
+                    />
+                  </picture>
+                );
+              })()}
               </Tilt>
             </Col>
           </Row>

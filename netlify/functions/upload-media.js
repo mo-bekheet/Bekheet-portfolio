@@ -1,7 +1,9 @@
-const fetch = require('node-fetch');
+const { S3Client, PutObjectCommand } = require('@aws-sdk/client-s3');
 
-const SUPABASE_URL = process.env.SUPABASE_URL;
-const SUPABASE_SERVICE_ROLE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY;
+const R2_ACCOUNT_ID = process.env.R2_ACCOUNT_ID;
+const R2_BUCKET_NAME = process.env.R2_BUCKET_NAME;
+const R2_API_TOKEN = process.env.R2_API_TOKEN;
+const R2_PUBLIC_DOMAIN = process.env.R2_PUBLIC_DOMAIN;
 
 const ALLOWED_MIME_TYPES = {
   'image/jpeg': { ext: '.jpg', magic: [0xFF, 0xD8, 0xFF] },
@@ -55,6 +57,21 @@ function validateFolder(folder) {
   return ALLOWED_FOLDERS.includes(folder) ? folder : 'misc';
 }
 
+function buildR2Client() {
+  if (!R2_ACCOUNT_ID || !R2_API_TOKEN) {
+    throw new Error('R2 credentials not configured');
+  }
+  const [accessKeyId, secretAccessKey] = R2_API_TOKEN.split(':');
+  if (!accessKeyId || !secretAccessKey) {
+    throw new Error('R2_API_TOKEN must be in format "access_key:secret_key"');
+  }
+  return new S3Client({
+    region: 'auto',
+    endpoint: `https://${R2_ACCOUNT_ID}.r2.cloudflarestorage.com`,
+    credentials: { accessKeyId, secretAccessKey },
+  });
+}
+
 exports.handler = async function (event) {
   const origin = event.headers.origin || event.headers.Origin || '';
   const corsHeaders = getCorsHeaders(origin);
@@ -68,15 +85,6 @@ exports.handler = async function (event) {
       statusCode: 405,
       headers: corsHeaders,
       body: JSON.stringify({ error: 'Method not allowed' }),
-    };
-  }
-
-  if (!SUPABASE_URL || !SUPABASE_SERVICE_ROLE_KEY) {
-    console.error('Supabase credentials not configured');
-    return {
-      statusCode: 500,
-      headers: corsHeaders,
-      body: JSON.stringify({ error: 'Upload service not configured' }),
     };
   }
 
@@ -143,29 +151,29 @@ exports.handler = async function (event) {
   const finalName = safeName.toLowerCase().endsWith(ext) ? safeName : safeName.replace(/\.[^.]+$/, '') + ext;
   const path = `${allowedFolder}/${Date.now()}-${finalName}`;
 
+  let r2;
   try {
-    const uploadRes = await fetch(`${SUPABASE_URL}/storage/v1/object/media/${path}`, {
-      method: 'POST',
-      headers: {
-        apikey: SUPABASE_SERVICE_ROLE_KEY,
-        Authorization: `Bearer ${SUPABASE_SERVICE_ROLE_KEY}`,
-        'Content-Type': mimeType,
-        'x-upsert': 'true',
-      },
-      body: buffer,
-    });
+    r2 = buildR2Client();
+  } catch (err) {
+    console.error('R2 client error:', err.message);
+    return {
+      statusCode: 500,
+      headers: corsHeaders,
+      body: JSON.stringify({ error: 'Upload service not configured' }),
+    };
+  }
 
-    if (!uploadRes.ok && uploadRes.status !== 409) {
-      const errText = await uploadRes.text();
-      console.error('Supabase upload error:', uploadRes.status, errText);
-      return {
-        statusCode: 502,
-        headers: corsHeaders,
-        body: JSON.stringify({ error: 'Failed to upload file' }),
-      };
-    }
+  try {
+    await r2.send(new PutObjectCommand({
+      Bucket: R2_BUCKET_NAME,
+      Key: path,
+      Body: buffer,
+      ContentType: mimeType,
+      CacheControl: 'public, max-age=31536000, immutable',
+    }));
 
-    const publicUrl = `${SUPABASE_URL}/storage/v1/object/public/media/${path}`;
+    const baseUrl = R2_PUBLIC_DOMAIN || `https://${R2_BUCKET_NAME}.${R2_ACCOUNT_ID}.r2.cloudflarestorage.com`;
+    const publicUrl = `${baseUrl}/${path}`;
 
     return {
       statusCode: 200,
@@ -173,7 +181,7 @@ exports.handler = async function (event) {
       body: JSON.stringify({ url: publicUrl, path, mimeType }),
     };
   } catch (error) {
-    console.error('Upload error:', error.message);
+    console.error('R2 upload error:', error.message);
     return {
       statusCode: 500,
       headers: corsHeaders,

@@ -4,6 +4,7 @@ import myImg from "../../assets/avatar.webp";
 import Tilt from "react-parallax-tilt";
 import ReactMarkdown from "react-markdown";
 import { useSiteProfile } from "../../hooks/useSiteProfile.js";
+import { getImageUrl, getPictureSources } from "../../lib/imageUtils.js";
 
 function Home2() {
   const profile = useSiteProfile();
@@ -23,11 +24,28 @@ function Home2() {
 
           <Col md={4} className="myAvtar">
             <Tilt>
-              <img
-                src={profile.avatar_url || myImg}
-                className="img-fluid"
-                alt={`${profile.full_name || "Mohamed Bekheet"} - Machine Learning Engineer`}
-              />
+              {(() => {
+                const avatarPath = profile.avatar_url || myImg;
+                const { sources, fallback } = getPictureSources(avatarPath, {
+                  widths: [200, 400, 600],
+                  formats: ['avif', 'webp'],
+                });
+                return (
+                  <picture>
+                    {sources.map((source, idx) => (
+                      <source key={idx} type={source.type} srcSet={source.srcSet} />
+                    ))}
+                    <img
+                      src={fallback}
+                      alt={`${profile.full_name || "Mohamed Bekheet"} - Machine Learning Engineer`}
+                      className="img-fluid"
+                      width={400}
+                      height={400}
+                      loading="lazy"
+                    />
+                  </picture>
+                );
+              })()}
             </Tilt>
           </Col>
         </Row>

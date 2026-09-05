@@ -3,6 +3,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import readline from 'node:readline/promises';
 import { stdin as input, stdout as output } from 'node:process';
+import { S3Client, PutObjectCommand } from '@aws-sdk/client-s3';
 
 const ROOT = path.resolve(process.cwd());
 const FORCE = process.argv.includes('--force');
@@ -22,6 +23,30 @@ const API_KEY = process.env.VITE_SUPABASE_ANON_KEY || ENV.VITE_SUPABASE_ANON_KEY
 if (!SUPABASE_URL || !API_KEY) {
   console.error('Missing VITE_SUPABASE_URL / VITE_SUPABASE_ANON_KEY in .env');
   process.exit(1);
+}
+
+const R2_ACCOUNT_ID = process.env.R2_ACCOUNT_ID || ENV.R2_ACCOUNT_ID;
+const R2_BUCKET_NAME = process.env.R2_BUCKET_NAME || ENV.R2_BUCKET_NAME;
+const R2_API_TOKEN = process.env.R2_API_TOKEN || ENV.R2_API_TOKEN;
+const R2_PUBLIC_DOMAIN = process.env.R2_PUBLIC_DOMAIN || ENV.R2_PUBLIC_DOMAIN;
+
+let r2Client = null;
+function getR2Client() {
+  if (r2Client) return r2Client;
+  if (!R2_ACCOUNT_ID || !R2_API_TOKEN) {
+    console.warn('R2 credentials not configured, image uploads will be skipped');
+    return null;
+  }
+  const [accessKeyId, secretAccessKey] = R2_API_TOKEN.split(':');
+  if (!accessKeyId || !secretAccessKey) {
+    throw new Error('R2_API_TOKEN must be in format "access_key:secret_key"');
+  }
+  r2Client = new S3Client({
+    region: 'auto',
+    endpoint: `https://${R2_ACCOUNT_ID}.r2.cloudflarestorage.com`,
+    credentials: { accessKeyId, secretAccessKey },
+  });
+  return r2Client;
 }
 
 const argValue = (flag) => {
@@ -96,22 +121,26 @@ async function uploadAsset(token, absolutePath, destination) {
     console.warn(`  ! missing file, skipping: ${path.relative(ROOT, absolutePath)}`);
     return null;
   }
+
+  const client = getR2Client();
+  if (!client) {
+    console.warn(`  ! R2 not configured, skipping upload: ${destination}`);
+    return null;
+  }
+
   const buffer = fs.readFileSync(absolutePath);
   const mime = MIME[path.extname(absolutePath).toLowerCase()] || 'application/octet-stream';
-  const res = await fetch(`${SUPABASE_URL}/storage/v1/object/media/${destination}`, {
-    method: 'POST',
-    headers: {
-      apikey: API_KEY,
-      Authorization: `Bearer ${token}`,
-      'Content-Type': mime,
-      'x-upsert': 'true'
-    },
-    body: buffer
-  });
-  if (!res.ok && res.status !== 409) {
-    throw new Error(`upload ${destination}: ${res.status} ${await res.text()}`);
-  }
-  const url = `${SUPABASE_URL}/storage/v1/object/public/media/${destination}`;
+
+  await client.send(new PutObjectCommand({
+    Bucket: R2_BUCKET_NAME,
+    Key: destination,
+    Body: buffer,
+    ContentType: mime,
+    CacheControl: 'public, max-age=31536000, immutable',
+  }));
+
+  const baseUrl = R2_PUBLIC_DOMAIN || `https://${R2_BUCKET_NAME}.${R2_ACCOUNT_ID}.r2.cloudflarestorage.com`;
+  const url = `${baseUrl}/${destination}`;
   uploadedUrls.set(destination, url);
   return url;
 }
